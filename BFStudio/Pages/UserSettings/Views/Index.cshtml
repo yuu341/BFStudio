@@ -1,0 +1,12 @@
+﻿@model BFStudio.Pages.UserSettings.Models.UserSettingsModel
+
+@{
+    ViewBag.Title = "ユーザ設定";
+}
+
+@using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "main" }))
+{
+    <div>
+        <h2>ユーザ設定</h2>
+    </div>
+}
