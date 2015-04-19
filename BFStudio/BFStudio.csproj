@@ -174,7 +174,9 @@
     <Compile Include="App_Start\BFViewEngine.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="App_Start\TicketAreaRegistration.cs" />
     <Compile Include="Entity\DBManageModel.Context.cs">
       <AutoGen>True</AutoGen>
