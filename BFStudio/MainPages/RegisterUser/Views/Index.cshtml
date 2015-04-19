@@ -1,0 +1,17 @@
+﻿@model BFStudio.Entity.DBA_USER
+
+@{
+    ViewBag.Title = "ユーザ設定";
+}
+
+@Html.BeginForm("Save", "RegisterUser", FormMethod.Post)
+{
+    @Html.LabelFor(m => m.USER_NM)
+    @Html.TextBoxFor(m => m.USER_NM)
+    @Html.LabelFor(m => m.LOGIN_ID)
+    @Html.TextBoxFor(m => m.LOGIN_ID)
+    @Html.LabelFor(m => m.PASSWORD)
+    @Html.PasswordFor(m => m.PASSWORD)
+
+    <input type="submit" value="保存"/>
+}

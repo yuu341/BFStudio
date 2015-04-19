@@ -1,0 +1,10 @@
+﻿@{
+    if (Request.IsAuthenticated)
+    {
+        Layout = "~/MainPages/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/MainPages/Shared/_RenderBodyOnly.cshtml";
+    }
+}

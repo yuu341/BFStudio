@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBManageModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\sqlite\bf-db.sqlite3" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MST_CODE">
+          <Key>
+            <PropertyRef Name="CODE_ID" />
+          </Key>
+          <Property Name="CODE_ID" Type="integer" Nullable="false" />
+          <Property Name="CODEKBN_ID" Type="integer" Nullable="false" />
+          <Property Name="CODE_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="CODE_NMS" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="UNDISPLAY_FLG" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MST_CODEKBN">
+          <Key>
+            <PropertyRef Name="CODEKBN_ID" />
+          </Key>
+          <Property Name="CODEKBN_ID" Type="integer" Nullable="false" />
+          <Property Name="KBN_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="KBN_NMS" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="UNDISPLAY_FLG" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MST_MENU">
+          <Key>
+            <PropertyRef Name="MENU_ID" />
+          </Key>
+          <Property Name="MENU_ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PMENU_ID" Type="integer" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="ACTION" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="CONTROLLER" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="SORT_NO" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MST_USER">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="LOGIN_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="LOCKOUT_FLG" Type="bit" Nullable="false" />
+          <Property Name="LOCKOUT_CNT" Type="integer" Nullable="false" />
+          <Property Name="LOCKOUT_TIME" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_MST_CODE_0_0">
+          <End Role="MST_CODEKBN" Type="Self.MST_CODEKBN" Multiplicity="1" />
+          <End Role="MST_CODE" Type="Self.MST_CODE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_CODEKBN">
+              <PropertyRef Name="CODEKBN_ID" />
+            </Principal>
+            <Dependent Role="MST_CODE">
+              <PropertyRef Name="CODEKBN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MST_MENU_0_0">
+          <End Role="MST_MENU" Type="Self.MST_MENU" Multiplicity="0..1" />
+          <End Role="MST_MENU1" Type="Self.MST_MENU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_MENU">
+              <PropertyRef Name="MENU_ID" />
+            </Principal>
+            <Dependent Role="MST_MENU1">
+              <PropertyRef Name="PMENU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBManageModelStoreContainer">
+          <EntitySet Name="MST_CODE" EntityType="Self.MST_CODE" store:Type="Tables" />
+          <EntitySet Name="MST_CODEKBN" EntityType="Self.MST_CODEKBN" store:Type="Tables" />
+          <EntitySet Name="MST_MENU" EntityType="Self.MST_MENU" store:Type="Tables" />
+          <EntitySet Name="MST_USER" EntityType="Self.MST_USER" store:Type="Tables" />
+          <AssociationSet Name="FK_MST_CODE_0_0" Association="Self.FK_MST_CODE_0_0">
+            <End Role="MST_CODEKBN" EntitySet="MST_CODEKBN" />
+            <End Role="MST_CODE" EntitySet="MST_CODE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MST_MENU_0_0" Association="Self.FK_MST_MENU_0_0">
+            <End Role="MST_MENU" EntitySet="MST_MENU" />
+            <End Role="MST_MENU1" EntitySet="MST_MENU" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBManageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBManageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MST_CODE" EntityType="DBManageModel.MST_CODE" />
+          <EntitySet Name="MST_CODEKBN" EntityType="DBManageModel.MST_CODEKBN" />
+          <EntitySet Name="MST_MENU" EntityType="DBManageModel.MST_MENU" />
+          <EntitySet Name="MST_USER" EntityType="DBManageModel.MST_USER" />
+          <AssociationSet Name="FK_MST_CODE_0_0" Association="DBManageModel.FK_MST_CODE_0_0">
+            <End Role="MST_CODEKBN" EntitySet="MST_CODEKBN" />
+            <End Role="MST_CODE" EntitySet="MST_CODE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MST_MENU_0_0" Association="DBManageModel.FK_MST_MENU_0_0">
+            <End Role="MST_MENU" EntitySet="MST_MENU" />
+            <End Role="MST_MENU1" EntitySet="MST_MENU" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MST_CODE">
+          <Key>
+            <PropertyRef Name="CODE_ID" />
+          </Key>
+          <Property Name="CODE_ID" Type="Int64" Nullable="false" />
+          <Property Name="CODEKBN_ID" Type="Int64" Nullable="false" />
+          <Property Name="CODE_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_NMS" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="UNDISPLAY_FLG" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MST_CODEKBN" Relationship="DBManageModel.FK_MST_CODE_0_0" FromRole="MST_CODE" ToRole="MST_CODEKBN" />
+        </EntityType>
+        <EntityType Name="MST_CODEKBN">
+          <Key>
+            <PropertyRef Name="CODEKBN_ID" />
+          </Key>
+          <Property Name="CODEKBN_ID" Type="Int64" Nullable="false" />
+          <Property Name="KBN_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="KBN_NMS" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="UNDISPLAY_FLG" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MST_CODE" Relationship="DBManageModel.FK_MST_CODE_0_0" FromRole="MST_CODEKBN" ToRole="MST_CODE" />
+        </EntityType>
+        <EntityType Name="MST_MENU">
+          <Key>
+            <PropertyRef Name="MENU_ID" />
+          </Key>
+          <Property Name="MENU_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PMENU_ID" Type="Int64" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="ACTION" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CONTROLLER" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="SORT_NO" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="MST_MENU1" Relationship="DBManageModel.FK_MST_MENU_0_0" FromRole="MST_MENU" ToRole="MST_MENU1" />
+          <NavigationProperty Name="MST_MENU2" Relationship="DBManageModel.FK_MST_MENU_0_0" FromRole="MST_MENU1" ToRole="MST_MENU" />
+        </EntityType>
+        <EntityType Name="MST_USER">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOGIN_ID" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="LOGIN_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="LOCKOUT_FLG" Type="Boolean" Nullable="false" />
+          <Property Name="LOCKOUT_CNT" Type="Int64" Nullable="false" />
+          <Property Name="LOCKOUT_TIME" Type="DateTime" />
+        </EntityType>
+        <Association Name="FK_MST_CODE_0_0">
+          <End Type="DBManageModel.MST_CODEKBN" Role="MST_CODEKBN" Multiplicity="1" />
+          <End Type="DBManageModel.MST_CODE" Role="MST_CODE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_CODEKBN">
+              <PropertyRef Name="CODEKBN_ID" />
+            </Principal>
+            <Dependent Role="MST_CODE">
+              <PropertyRef Name="CODEKBN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MST_MENU_0_0">
+          <End Type="DBManageModel.MST_MENU" Role="MST_MENU" Multiplicity="0..1" />
+          <End Type="DBManageModel.MST_MENU" Role="MST_MENU1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_MENU">
+              <PropertyRef Name="MENU_ID" />
+            </Principal>
+            <Dependent Role="MST_MENU1">
+              <PropertyRef Name="PMENU_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBManageModelStoreContainer" CdmEntityContainer="DBManageEntities">
+          <EntitySetMapping Name="MST_CODE">
+            <EntityTypeMapping TypeName="DBManageModel.MST_CODE">
+              <MappingFragment StoreEntitySet="MST_CODE">
+                <ScalarProperty Name="UNDISPLAY_FLG" ColumnName="UNDISPLAY_FLG" />
+                <ScalarProperty Name="CODE_NMS" ColumnName="CODE_NMS" />
+                <ScalarProperty Name="CODE_NM" ColumnName="CODE_NM" />
+                <ScalarProperty Name="CODEKBN_ID" ColumnName="CODEKBN_ID" />
+                <ScalarProperty Name="CODE_ID" ColumnName="CODE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MST_CODEKBN">
+            <EntityTypeMapping TypeName="DBManageModel.MST_CODEKBN">
+              <MappingFragment StoreEntitySet="MST_CODEKBN">
+                <ScalarProperty Name="UNDISPLAY_FLG" ColumnName="UNDISPLAY_FLG" />
+                <ScalarProperty Name="KBN_NMS" ColumnName="KBN_NMS" />
+                <ScalarProperty Name="KBN_NM" ColumnName="KBN_NM" />
+                <ScalarProperty Name="CODEKBN_ID" ColumnName="CODEKBN_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MST_MENU">
+            <EntityTypeMapping TypeName="DBManageModel.MST_MENU">
+              <MappingFragment StoreEntitySet="MST_MENU">
+                <ScalarProperty Name="SORT_NO" ColumnName="SORT_NO" />
+                <ScalarProperty Name="CONTROLLER" ColumnName="CONTROLLER" />
+                <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="PMENU_ID" ColumnName="PMENU_ID" />
+                <ScalarProperty Name="MENU_ID" ColumnName="MENU_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MST_USER">
+            <EntityTypeMapping TypeName="DBManageModel.MST_USER">
+              <MappingFragment StoreEntitySet="MST_USER">
+                <ScalarProperty Name="LOCKOUT_TIME" ColumnName="LOCKOUT_TIME" />
+                <ScalarProperty Name="LOCKOUT_CNT" ColumnName="LOCKOUT_CNT" />
+                <ScalarProperty Name="LOCKOUT_FLG" ColumnName="LOCKOUT_FLG" />
+                <ScalarProperty Name="LOGIN_NM" ColumnName="LOGIN_NM" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="なし" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

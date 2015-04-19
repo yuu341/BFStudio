@@ -1,0 +1,15 @@
+﻿
+@model IEnumerable<BFStudio.Entity.MST_MENU>
+
+@foreach (var menu in Model.OrderBy(p => p.SORT_NO))
+{
+    <ul>
+        <li>@Html.ActionLink(@menu.NAME, @menu.ACTION, @menu.CONTROLLER, routeValues: null, htmlAttributes: new { @class = "upper-menu" })</li>
+    </ul>
+}
+<ul>
+    <li>@Html.ActionLink("ユーザ登録", "Create", "ResisterUser", routeValues: null, htmlAttributes: new { @class = "upper-menu" })</li>
+</ul>
+<ul>
+    <li>@Html.ActionLink("ログイン", "Index", "Login", routeValues: null, htmlAttributes: new { @class = "upper-menu" })</li>
+</ul>

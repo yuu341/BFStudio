@@ -1,0 +1,21 @@
+﻿@model BFStudio.Entity.MST_USER
+
+@{
+    ViewBag.Title = "ログイン画面";
+}
+
+@using (Html.BeginForm("Authentication", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div id="login">
+        <div>
+            @Html.LabelFor(m => m.Login_Id_Form)
+            @Html.TextBoxFor(m => m.Login_Id_Form)
+            @Html.LabelFor(m => m.Password_Form)
+            @Html.PasswordFor(m => m.Password_Form)
+        </div>
+        <div>
+            <input type="submit" value="ログイン" />
+        </div>
+    </div>
+}
