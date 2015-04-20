@@ -1,4 +1,5 @@
-﻿@model BFStudio.MainPages.Top.Models.TopModel
+﻿@using BFStudio.Utility.MVC
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 </head>
 <body>
     <div class="upper-menu">
-        @Html.Partial("_UserPartial",Model.Menues)
+        @Html.Partial("_UserPartial",Constants.MenuList)
     </div>
 
     <div class="main">

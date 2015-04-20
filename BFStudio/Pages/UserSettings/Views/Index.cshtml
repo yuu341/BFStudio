@@ -4,9 +4,70 @@
     ViewBag.Title = "ユーザ設定";
 }
 
-@using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "main" }))
+<div id="user-form">
+    @using (Ajax.BeginForm( actionName:"Submit" , routeValues:null,ajaxOptions:new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "main"} , htmlAttributes:new {}))
 {
-    <div>
-        <h2>ユーザ設定</h2>
-    </div>
+        @Html.AntiForgeryToken()
+        <div>
+            <h2>ユーザ設定</h2>
+        </div>
+
+        <div>
+            <div>
+                @Html.LabelFor( m => m.UpdateTarget.LOGIN_NM)
+                @Html.TextBoxFor( m => m.UpdateTarget.LOGIN_NM)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.UpdateTarget.Password_Form)
+                @Html.TextBoxFor(m => m.UpdateTarget.Password_Form)
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.UpdateTarget.PasswordConfirm_Form)
+                @Html.TextBoxFor(m => m.UpdateTarget.PasswordConfirm_Form)
+            </div>
+
+            <div>
+                <button type="submit">更新</button>
+                <button type="submit">キャンセル</button>
+            </div>
+        </div>
+}
+</div>
+
+<div id="grid">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>LockCount</th>
+                <th>LockFlg</th>
+                <th>LockDate</th>
+                <th>Function</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var each in Model.UserList)
+            {
+                <tr>
+                    <td>@each.LOGIN_ID</td>
+                    <td>@each.LOGIN_NM</td>
+                    <td>@each.LOCKOUT_CNT</td>
+                    <td>@each.LOCKOUT_FLG</td>
+                    <td>@each.LOCKOUT_TIME</td>
+                    <td>
+                        @Ajax.ActionLink("編集","Update",new AjaxOptions(){ LoadingElementId="user-form" })
+                        @Ajax.ActionLink("削除","Update",new AjaxOptions(){ Confirm="削除しますか？" , LoadingElementId="grid"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/blockui")
+    @Scripts.Render("~/bundles/jqueryval")
 }

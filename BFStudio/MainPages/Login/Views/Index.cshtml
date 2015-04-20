@@ -11,8 +11,10 @@
         <div>
             @Html.LabelFor(m => m.Login_Id_Form)
             @Html.TextBoxFor(m => m.Login_Id_Form)
+            @Html.ValidationMessageFor(m => m.Login_Id_Form)
             @Html.LabelFor(m => m.Password_Form)
             @Html.PasswordFor(m => m.Password_Form)
+            @Html.ValidationMessageFor(m => m.Password_Form)
         </div>
         <div>
             <input type="submit" value="ログイン" />

@@ -36,13 +36,14 @@ namespace BFStudio.MainPages.Login.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Authentication(MST_USER model, string returnUrl)
         {
-            PasswordHasher hash = new PasswordHasher();
-            var result = hash.HashPassword(model.Password_Form);
 
             if (!ModelState.IsValid)
             {
                 return View("Index",model);
             }
+
+            PasswordHasher hash = new PasswordHasher();
+            var result = hash.HashPassword(model.Password_Form);
 
             // これは、アカウント ロックアウトの基準となるログイン失敗回数を数えません。
             // パスワード入力失敗回数に基づいてアカウントがロックアウトされるように設定するには、shouldLockout: true に変更してください。
