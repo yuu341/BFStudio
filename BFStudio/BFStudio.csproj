@@ -248,16 +248,10 @@
       <DependentUpon>menu.css</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Pages\_ViewStart.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Pages\_ViewStart.cshtml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <EntityDeploy Include="Entity\DBManageModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBManageModel.Designer.cs</LastGenOutput>
@@ -300,6 +294,12 @@
     <Content Include="MainPages\RegisterUser\Views\Details.cshtml" />
     <Content Include="MainPages\RegisterUser\Views\Edit.cshtml" />
     <Content Include="MainPages\RegisterUser\Views\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
