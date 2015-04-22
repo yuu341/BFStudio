@@ -22,5 +22,17 @@ namespace BFStudio
             ViewEngines.Engines.Add(new BFViewEngine());
 
         }
+
+        public static bool IsDebug
+        {
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
     }
 }

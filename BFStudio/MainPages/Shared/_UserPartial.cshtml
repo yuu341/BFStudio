@@ -7,3 +7,8 @@
         <li>@Ajax.ActionLink(@menu.NAME,@menu.ACTION ,@menu.CONTROLLER , null , new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "main" }, htmlAttributes: new { @class = "upper-menu" })</li>
     </ul>
 }
+
+<ul class="logout">
+    <li>@Ajax.ActionLink("ログアウト", "LogOff", "Login", null, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "main" }, htmlAttributes: new { @class = "upper-menu" })</li>
+</ul>
+

@@ -29,5 +29,7 @@ namespace BFStudio.Entity
         public virtual DbSet<MST_CODEKBN> MST_CODEKBN { get; set; }
         public virtual DbSet<MST_MENU> MST_MENU { get; set; }
         public virtual DbSet<MST_USER> MST_USER { get; set; }
+        public virtual DbSet<DBA_TICKET> DBA_TICKET { get; set; }
+        public virtual DbSet<V_TICKETLIST> V_TICKETLIST { get; set; }
     }
 }

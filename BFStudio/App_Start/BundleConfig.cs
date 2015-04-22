@@ -26,10 +26,25 @@ namespace BFStudio
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            //CSSを変更すると、リアルタイム更新をする
+            bundles.Add(new ScriptBundle("~/Content/cssrefresh").Include(
+                        "~/Scripts/cssrefresh.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
+                        "~/Scripts/jquery.dataTables.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Content/datatable").Include(
+                        "~/Content/jquery.dataTables.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/normalize-{version}",
                       "~/Content/bootstrap.css",
                       "~/Content/menu.css",
                       "~/Content/site.css"));
+
+            //自作カレンダー
+            bundles.Add(new StyleBundle("~/bundles/calendar").Include(
+                        "~/Content/calendar.css"));
         }
     }
 }

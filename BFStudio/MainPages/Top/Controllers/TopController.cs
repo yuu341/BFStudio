@@ -8,10 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 //using BFStudio.Entity;
 using BFStudio.MainPages.Top.Models;
+using BFStudio.Utility.MVC;
 
 namespace BFStudio.MainPages.Top.Controllers
 {
-    public class TopController : Controller
+    [Authorize]
+    public class TopController : BaseController
     {
 
         // GET: Top

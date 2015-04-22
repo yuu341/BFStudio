@@ -1,0 +1,51 @@
+﻿.calendar-body {
+  width: 1200px;
+  /*//日曜
+    .sunday label{
+        width:100px;
+        height:200px;
+    }
+
+    //土曜
+    .saturday{
+        width:100px;
+        height:200px;
+    }
+
+    //平日
+    .weekday{
+        width:100px;
+        height:200px;
+    }*/
+}
+.calendar-body .disp-date {
+  margin: 0 auto;
+}
+.calendar-body .disp-date > input {
+  background-color: inherit;
+  border-style: none;
+  text-align: right;
+}
+div.calendar-body {
+  /*width:700px;
+        height:1000px;*/
+  background-color: aquamarine;
+}
+.calendar-body th > div {
+  width: 200px;
+  height: 20px;
+  background-color: aqua;
+  margin: 0;
+  padding: 0;
+}
+.calendar-body th > div > label {
+  width: inherit;
+  text-align: center;
+  background-color: pink;
+}
+.calendar-body td > div {
+  width: 200px;
+  height: 150px;
+  background-color: antiquewhite;
+}
+/*# sourceMappingURL=calendar.css.map */

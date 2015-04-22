@@ -178,6 +178,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="App_Start\TicketAreaRegistration.cs" />
+    <Compile Include="Entity\DBA_TICKET.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\DBManageModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -206,6 +209,9 @@
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\p\MST_USER.cs" />
+    <Compile Include="Entity\V_TICKETLIST.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -214,12 +220,17 @@
     <Compile Include="MainPages\RegisterUser\Controllers\RegisterUserController.cs" />
     <Compile Include="MainPages\Top\Controllers\TopController.cs" />
     <Compile Include="MainPages\Top\Models\TopModel.cs" />
+    <Compile Include="Pages\TicketList\Controllers\TicketListController.cs" />
+    <Compile Include="Pages\TicketList\Models\V_TICKETLIST.cs" />
+    <Compile Include="Pages\TicketList\Models\DBA_TICKET.cs" />
+    <Compile Include="Pages\TicketList\Models\TicketListModel.cs" />
     <Compile Include="Pages\UserSettings\Controllers\UserSettingsController.cs" />
     <Compile Include="Pages\UserSettings\Models\UserSettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\Manager\ApplicationUserManager.cs" />
     <Compile Include="Utility\Manager\BFStudioUserStore.cs" />
+    <Compile Include="Utility\Manager\Logging.cs" />
     <Compile Include="Utility\MVC\BaseModel.cs" />
     <Compile Include="Utility\MVC\BaseController.cs" />
     <Compile Include="Utility\MVC\Constants.cs" />
@@ -227,16 +238,43 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\calendar.css">
+      <DependentUpon>calendar.less</DependentUpon>
+    </Content>
+    <Content Include="Content\calendar.min.css">
+      <DependentUpon>calendar.css</DependentUpon>
+    </Content>
+    <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\menu.css">
       <DependentUpon>menu.less</DependentUpon>
     </Content>
     <Content Include="Content\menu.min.css">
       <DependentUpon>menu.css</DependentUpon>
     </Content>
+    <Content Include="Content\Normalize-1.0.css.map">
+      <DependentUpon>Normalize-1.0.css</DependentUpon>
+    </Content>
+    <None Include="Content\normalize-1.0.less" />
+    <Content Include="Content\Normalize-1.0.css">
+      <DependentUpon>normalize-1.0.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Normalize-1.0.min.css">
+      <DependentUpon>Normalize-1.0.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.css.map">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
+    <None Include="Content\Site.less" />
+    <Content Include="Log4Net.Config.xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="MainPages\Top\Views\Index.cshtml" />
@@ -247,8 +285,10 @@
     <Content Include="Content\menu.css.map">
       <DependentUpon>menu.css</DependentUpon>
     </Content>
+    <Content Include="Scripts\CSSrefresh.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Pages\_ViewStart.cshtml" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -274,6 +314,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Content Include="Pages\UserSettings\Views\Index.cshtml" />
     <Content Include="Pages\Web.config" />
+    <Content Include="Content\calendar.less" />
+    <Content Include="Content\calendar.css.map">
+      <DependentUpon>calendar.css</DependentUpon>
+    </Content>
+    <Content Include="Pages\TicketList\Views\Index.cshtml" />
     <None Include="Properties\PublishProfiles\YuuServer.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -304,37 +349,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="MainPages\RegisterUser\Models\" />
-    <Folder Include="Pages\Blog\Controllers\" />
-    <Folder Include="Pages\Blog\Models\" />
-    <Folder Include="Pages\Blog\Views\" />
-    <Folder Include="Pages\Chat\Controllers\" />
-    <Folder Include="Pages\Chat\Models\" />
-    <Folder Include="Pages\Chat\Views\" />
     <Folder Include="Pages\Database\Controllers\" />
     <Folder Include="Pages\Database\Models\" />
     <Folder Include="Pages\Database\Views\" />
-    <Folder Include="Pages\Memo\Controllers\" />
-    <Folder Include="Pages\Memo\Models\" />
-    <Folder Include="Pages\Memo\Views\" />
-    <Folder Include="Pages\MyPage\Controllers\" />
-    <Folder Include="Pages\MyPage\Models\" />
-    <Folder Include="Pages\MyPage\Views\" />
-    <Folder Include="Pages\ProjectSettings\Controllers\" />
-    <Folder Include="Pages\ProjectSettings\Models\" />
-    <Folder Include="Pages\ProjectSettings\Views\" />
-    <Folder Include="Pages\Spec\Controllers\" />
-    <Folder Include="Pages\Spec\Models\" />
-    <Folder Include="Pages\Spec\Views\" />
-    <Folder Include="Pages\TestData\Controllers\" />
-    <Folder Include="Pages\TestData\Models\" />
-    <Folder Include="Pages\TestData\Views\" />
-    <Folder Include="Pages\TicketsList\Controllers\" />
-    <Folder Include="Pages\TicketsList\Models\" />
-    <Folder Include="Pages\TicketsList\Views\" />
     <Folder Include="Pages\Tickets\Controllers\" />
     <Folder Include="Pages\Tickets\Models\" />
     <Folder Include="Pages\Tickets\Views\" />
-    <Folder Include="Pages\Top\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

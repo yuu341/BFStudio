@@ -11,6 +11,8 @@
         <EntityTypeShape EntityType="DBManageModel.MST_USER" Width="1.5" PointX="0.75" PointY="4.75" />
         <AssociationConnector Association="DBManageModel.FK_MST_CODE_0_0" />
         <AssociationConnector Association="DBManageModel.FK_MST_MENU_0_0" />
+        <EntityTypeShape EntityType="DBManageModel.DBA_TICKET" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DBManageModel.V_TICKETLIST" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

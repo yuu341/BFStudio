@@ -1,0 +1,53 @@
+﻿@model BFStudio.Pages.TicketList.Models.TicketListModel
+
+@{
+    ViewBag.Title ="チケット管理";
+}
+@Styles.Render("~/Content/datatable")
+@Scripts.Render("~/bundles/datatable")
+<script>
+    $(document).ready(function () {
+
+        var table = $('#example').DataTable();
+
+        $('#example tbody').on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+        });
+
+        $('#button').click(function () {
+            alert(table.rows('.selected').data().length + ' row(s) selected');
+        });
+
+    });
+</script>
+<div>
+    <table id="example" class="display">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(m => m.TicketList.FirstOrDefault().CREATE_TIME)</th>
+                <th>@Html.LabelFor(m => m.TicketList.FirstOrDefault().StateString)</th>
+                <th>@Html.LabelFor(m => m.TicketList.FirstOrDefault().TO_USER_NAME)</th>
+                <th>@Html.LabelFor(m => m.TicketList.FirstOrDefault().ProjectName)</th>
+                <th>@Html.LabelFor(m => m.TicketList.FirstOrDefault().TITLE)</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var each in Model.TicketList)
+            {
+                <tr>
+                    <td>@each.CREATE_TIME</td>
+                    <td>@each.StateString</td>
+                    <td>@each.TO_USER_NAME</td>
+                    <td>@each.ProjectName</td>
+                    <td>@each.TITLE</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/blockui")
+    @Scripts.Render("~/bundles/jqueryval")
+}

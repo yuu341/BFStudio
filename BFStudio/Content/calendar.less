@@ -1,0 +1,56 @@
+﻿@cell-height:150px;
+@cell-width:200px;
+@header-height:20px;
+
+.calendar-body{
+    width:1200px;
+    .disp-date{
+
+         margin:0 auto;
+        > input{
+            background-color:inherit;
+            border-style:none;
+            text-align:right;
+        }
+    }
+    div&{
+        /*width:700px;
+        height:1000px;*/
+        background-color:aquamarine;
+    }
+    /*//日曜
+    .sunday label{
+        width:100px;
+        height:200px;
+    }
+
+    //土曜
+    .saturday{
+        width:100px;
+        height:200px;
+    }
+
+    //平日
+    .weekday{
+        width:100px;
+        height:200px;
+    }*/
+
+    th > div{
+        width:@cell-width;
+        height:@header-height;
+        background-color:aqua;
+        margin:0;
+        padding:0;
+        > label{
+            width:inherit;
+            text-align:center;
+            background-color:pink;
+        }
+    }
+    td > div{
+        width:@cell-width;
+        height:@cell-height;
+        background-color:antiquewhite;
+    }
+}

@@ -1,4 +1,4 @@
-﻿using BFStudio.Pages.UserSettings.Models;
+﻿using BFStudio.Pages.TicketList.Models;
 using BFStudio.Utility.MVC;
 using System;
 using System.Collections.Generic;
@@ -10,15 +10,15 @@ using System.Web;
 using System.Web.Mvc;
 //using BFStudio.Entity;
 
-namespace BFStudio.Pages.UserSettings.Controllers
+namespace BFStudio.Pages.TicketList.Controllers
 {
     [Authorize]
-    public class UserSettingsController : BaseController
+    public class TicketListController : BaseController
     {
 
         public ActionResult Index()
         {
-            UserSettingsModel model = new UserSettingsModel();
+            TicketListModel model = new TicketListModel();
 
             return View(model);
         }

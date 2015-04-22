@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BFStudio.Utility.MVC;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace BFStudio.MainPages.RegisterUser.Controllers
 {
-    public class RegisterUserController : Controller
+    public class RegisterUserController : BaseController
     {
         //private Entities db = new Entities();
 

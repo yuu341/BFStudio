@@ -7,10 +7,12 @@ using Microsoft.Owin.Security;
 using System.Web;
 using System.Web.Mvc;
 using BFStudio.Entity;
+using BFStudio.Utility.MVC;
 
 namespace BFStudio.MainPages.Login.Controllers
 {
-    public class LoginController : Controller
+    [Authorize]
+    public class LoginController : BaseController
     {
         private ActionResult RedirectToLocal(string returnUrl)
         {
@@ -28,46 +30,42 @@ namespace BFStudio.MainPages.Login.Controllers
             {
                 return RedirectToLocal(returnUrl);
             }
-            return View(new MST_USER());
+            return View(new LoginModel());
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult LogOff()
+        {
+            var authentication = this.HttpContext.GetOwinContext().Authentication;
+            authentication.SignOut();
+
+            return RedirectToLocal("/");
+            
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Authentication(MST_USER model, string returnUrl)
+        public async Task<ActionResult> Authentication(LoginModel model, string returnUrl)
         {
-
+            Logging.Logger.Info( "[" + model.LoginId + "]がログインを試行...");
             if (!ModelState.IsValid)
             {
                 return View("Index",model);
             }
 
             PasswordHasher hash = new PasswordHasher();
-            var result = hash.HashPassword(model.Password_Form);
+            var result = hash.HashPassword(model.Password);
 
-            // これは、アカウント ロックアウトの基準となるログイン失敗回数を数えません。
-            // パスワード入力失敗回数に基づいてアカウントがロックアウトされるように設定するには、shouldLockout: true に変更してください。
-            //var result = await SignInManager.PasswordSignInAsync(model.LoginId, model.Password, model.RememberMe, shouldLockout: false);
-            //switch (result)
-            //{
-            //    case SignInStatus.Success:
-            //        return View("Top");
-            //    //case SignInStatus.LockedOut:
-            //    //    return View("Lockout");
-            //    case SignInStatus.RequiresVerification:
-            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            //    case SignInStatus.Failure:
-            //    default:
-            //        ModelState.AddModelError("", "無効なログイン試行です。");
-            //        return View(model);
-            //}
 
             ApplicationUserManager manager = new ApplicationUserManager(new BFStudioUserStore());
 
-            var user = await manager.FindAsync(model.Login_Id_Form,model.Password_Form);
+            var user = await manager.FindAsync(model.LoginId,model.Password);
 
             if (user != null)
             {
+                Logging.Logger.Info("[" + model.LoginId + "]がログインしました。");
                 var authentication = this.HttpContext.GetOwinContext().Authentication;
                 var identify = await manager.CreateIdentityAsync(
                     user,
@@ -79,6 +77,7 @@ namespace BFStudio.MainPages.Login.Controllers
             }
             else
             {
+                Logging.Logger.Info("[" + model.LoginId + "]がログインを失敗しました。");
                 ModelState.AddModelError("", "ログイン認証に失敗しました。");
             }
             return View("Index",model);
