@@ -25,11 +25,17 @@ namespace BFStudio.Entity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<DBA_COLUMN> DBA_COLUMN { get; set; }
+        public virtual DbSet<DBA_PLAN> DBA_PLAN { get; set; }
         public virtual DbSet<DBA_PROJECT> DBA_PROJECT { get; set; }
+        public virtual DbSet<DBA_TABLE> DBA_TABLE { get; set; }
+        public virtual DbSet<DBA_TABLE_FOREIGN> DBA_TABLE_FOREIGN { get; set; }
         public virtual DbSet<DBA_TICKET> DBA_TICKET { get; set; }
         public virtual DbSet<DBA_TODO> DBA_TODO { get; set; }
+        public virtual DbSet<DBA_TODOKBN> DBA_TODOKBN { get; set; }
         public virtual DbSet<MST_CODE> MST_CODE { get; set; }
         public virtual DbSet<MST_CODEKBN> MST_CODEKBN { get; set; }
+        public virtual DbSet<MST_DATABASE_TYPE> MST_DATABASE_TYPE { get; set; }
         public virtual DbSet<MST_MENU> MST_MENU { get; set; }
         public virtual DbSet<MST_USER> MST_USER { get; set; }
         public virtual DbSet<V_CODELIST> V_CODELIST { get; set; }

@@ -5,12 +5,61 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBManageModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\sqlite\bf-db.sqlite3" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DBA_COLUMN">
+          <Key>
+            <PropertyRef Name="COLUMN_ID" />
+          </Key>
+          <Property Name="COLUMN_ID" Type="integer" Nullable="false" />
+          <Property Name="VERSION" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="TABLE_ID" Type="integer" Nullable="false" />
+          <Property Name="COLUMN_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="TYPE_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="POPULAR_NM" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="COMMENT" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="SORT_NO" Type="integer" Nullable="false" />
+          <Property Name="PKEY_FLG" Type="bit" Nullable="false" />
+          <Property Name="INDEX_FLG" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBA_PLAN">
+          <Key>
+            <PropertyRef Name="PLAN_ID" />
+          </Key>
+          <Property Name="PLAN_ID" Type="integer" Nullable="false" />
+          <Property Name="USER_ID" Type="integer" Nullable="false" />
+          <Property Name="TITLE" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="VISIBLE_CD" Type="integer" Nullable="false" />
+          <Property Name="PLAN_CD" Type="integer" Nullable="false" />
+          <Property Name="DETAILS" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="START_TIME" Type="datetime" />
+          <Property Name="END_TIME" Type="datetime" />
+          <Property Name="PLAN_TIME" Type="datetime" />
+        </EntityType>
         <EntityType Name="DBA_PROJECT">
           <Key>
             <PropertyRef Name="PROJECT_ID" />
           </Key>
           <Property Name="PROJECT_ID" Type="integer" Nullable="false" />
           <Property Name="PROJECT_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBA_TABLE">
+          <Key>
+            <PropertyRef Name="TABLE_ID" />
+          </Key>
+          <Property Name="TABLE_ID" Type="integer" Nullable="false" />
+          <Property Name="DATABASE_TYPE" Type="integer" Nullable="false" />
+          <Property Name="VERSION" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="TABLE_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="POPULAR_NM" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="COMMENT" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="DBA_TABLE_FOREIGN">
+          <Key>
+            <PropertyRef Name="KEY_ID" />
+          </Key>
+          <Property Name="KEY_ID" Type="integer" Nullable="false" />
+          <Property Name="KEY_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="PARENT_TABLE_ID" Type="integer" Nullable="false" />
+          <Property Name="CHILD_TABLE_ID" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="DBA_TICKET">
           <Key>
@@ -47,6 +96,16 @@
           <Property Name="DETAIL" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="STAGE" Type="integer" Nullable="false" />
         </EntityType>
+        <EntityType Name="DBA_TODOKBN">
+          <Key>
+            <PropertyRef Name="KBN_ID" />
+          </Key>
+          <Property Name="KBN_ID" Type="integer" Nullable="false" />
+          <Property Name="PKBN_ID" Type="integer" />
+          <Property Name="USER_ID" Type="integer" />
+          <Property Name="KBN_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="TODO_CD" Type="integer" Nullable="false" />
+        </EntityType>
         <EntityType Name="MST_CODE">
           <Key>
             <PropertyRef Name="CODE_ID" />
@@ -68,6 +127,14 @@
           <Property Name="KBN_NMS" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="UNDISPLAY_FLG" Type="bit" Nullable="false" />
           <Property Name="COMMENT" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="MST_DATABASE_TYPE">
+          <Key>
+            <PropertyRef Name="DATABASE_ID" />
+          </Key>
+          <Property Name="DATABASE_ID" Type="integer" Nullable="false" />
+          <Property Name="VERSION" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="DATABASE_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
         </EntityType>
         <EntityType Name="MST_MENU">
           <Key>
@@ -176,11 +243,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBManageModelStoreContainer">
+          <EntitySet Name="DBA_COLUMN" EntityType="Self.DBA_COLUMN" store:Type="Tables" />
+          <EntitySet Name="DBA_PLAN" EntityType="Self.DBA_PLAN" store:Type="Tables" />
           <EntitySet Name="DBA_PROJECT" EntityType="Self.DBA_PROJECT" store:Type="Tables" />
+          <EntitySet Name="DBA_TABLE" EntityType="Self.DBA_TABLE" store:Type="Tables" />
+          <EntitySet Name="DBA_TABLE_FOREIGN" EntityType="Self.DBA_TABLE_FOREIGN" store:Type="Tables" />
           <EntitySet Name="DBA_TICKET" EntityType="Self.DBA_TICKET" store:Type="Tables" />
           <EntitySet Name="DBA_TODO" EntityType="Self.DBA_TODO" store:Type="Tables" />
+          <EntitySet Name="DBA_TODOKBN" EntityType="Self.DBA_TODOKBN" store:Type="Tables" />
           <EntitySet Name="MST_CODE" EntityType="Self.MST_CODE" store:Type="Tables" />
           <EntitySet Name="MST_CODEKBN" EntityType="Self.MST_CODEKBN" store:Type="Tables" />
+          <EntitySet Name="MST_DATABASE_TYPE" EntityType="Self.MST_DATABASE_TYPE" store:Type="Tables" />
           <EntitySet Name="MST_MENU" EntityType="Self.MST_MENU" store:Type="Tables" />
           <EntitySet Name="MST_USER" EntityType="Self.MST_USER" store:Type="Tables" />
           <EntitySet Name="V_CODELIST" EntityType="Self.V_CODELIST" store:Type="Views">
@@ -233,11 +306,17 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="DBManageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBManageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DBA_COLUMN" EntityType="DBManageModel.DBA_COLUMN" />
+          <EntitySet Name="DBA_PLAN" EntityType="DBManageModel.DBA_PLAN" />
           <EntitySet Name="DBA_PROJECT" EntityType="DBManageModel.DBA_PROJECT" />
+          <EntitySet Name="DBA_TABLE" EntityType="DBManageModel.DBA_TABLE" />
+          <EntitySet Name="DBA_TABLE_FOREIGN" EntityType="DBManageModel.DBA_TABLE_FOREIGN" />
           <EntitySet Name="DBA_TICKET" EntityType="DBManageModel.DBA_TICKET" />
           <EntitySet Name="DBA_TODO" EntityType="DBManageModel.DBA_TODO" />
+          <EntitySet Name="DBA_TODOKBN" EntityType="DBManageModel.DBA_TODOKBN" />
           <EntitySet Name="MST_CODE" EntityType="DBManageModel.MST_CODE" />
           <EntitySet Name="MST_CODEKBN" EntityType="DBManageModel.MST_CODEKBN" />
+          <EntitySet Name="MST_DATABASE_TYPE" EntityType="DBManageModel.MST_DATABASE_TYPE" />
           <EntitySet Name="MST_MENU" EntityType="DBManageModel.MST_MENU" />
           <EntitySet Name="MST_USER" EntityType="DBManageModel.MST_USER" />
           <EntitySet Name="V_CODELIST" EntityType="DBManageModel.V_CODELIST" />
@@ -252,12 +331,61 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
             <End Role="MST_MENU1" EntitySet="MST_MENU" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DBA_COLUMN">
+          <Key>
+            <PropertyRef Name="COLUMN_ID" />
+          </Key>
+          <Property Name="COLUMN_ID" Type="Int64" Nullable="false" />
+          <Property Name="VERSION" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TABLE_ID" Type="Int64" Nullable="false" />
+          <Property Name="COLUMN_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TYPE_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="POPULAR_NM" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="COMMENT" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="SORT_NO" Type="Int64" Nullable="false" />
+          <Property Name="PKEY_FLG" Type="Boolean" Nullable="false" />
+          <Property Name="INDEX_FLG" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBA_PLAN">
+          <Key>
+            <PropertyRef Name="PLAN_ID" />
+          </Key>
+          <Property Name="PLAN_ID" Type="Int64" Nullable="false" />
+          <Property Name="USER_ID" Type="Int64" Nullable="false" />
+          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="VISIBLE_CD" Type="Int64" Nullable="false" />
+          <Property Name="PLAN_CD" Type="Int64" Nullable="false" />
+          <Property Name="DETAILS" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="START_TIME" Type="DateTime" />
+          <Property Name="END_TIME" Type="DateTime" />
+          <Property Name="PLAN_TIME" Type="DateTime" />
+        </EntityType>
         <EntityType Name="DBA_PROJECT">
           <Key>
             <PropertyRef Name="PROJECT_ID" />
           </Key>
           <Property Name="PROJECT_ID" Type="Int64" Nullable="false" />
           <Property Name="PROJECT_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DBA_TABLE">
+          <Key>
+            <PropertyRef Name="TABLE_ID" />
+          </Key>
+          <Property Name="TABLE_ID" Type="Int64" Nullable="false" />
+          <Property Name="DATABASE_TYPE" Type="Int64" Nullable="false" />
+          <Property Name="VERSION" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TABLE_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="POPULAR_NM" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="COMMENT" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DBA_TABLE_FOREIGN">
+          <Key>
+            <PropertyRef Name="KEY_ID" />
+          </Key>
+          <Property Name="KEY_ID" Type="Int64" Nullable="false" />
+          <Property Name="KEY_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_TABLE_ID" Type="Int64" Nullable="false" />
+          <Property Name="CHILD_TABLE_ID" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="DBA_TICKET">
           <Key>
@@ -294,6 +422,16 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
           <Property Name="DETAIL" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="STAGE" Type="Int64" Nullable="false" />
         </EntityType>
+        <EntityType Name="DBA_TODOKBN">
+          <Key>
+            <PropertyRef Name="KBN_ID" />
+          </Key>
+          <Property Name="KBN_ID" Type="Int64" Nullable="false" />
+          <Property Name="PKBN_ID" Type="Int64" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="KBN_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TODO_CD" Type="Int64" Nullable="false" />
+        </EntityType>
         <EntityType Name="MST_CODE">
           <Key>
             <PropertyRef Name="CODE_ID" />
@@ -317,6 +455,14 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
           <Property Name="UNDISPLAY_FLG" Type="Boolean" Nullable="false" />
           <Property Name="COMMENT" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MST_CODE" Relationship="DBManageModel.FK_MST_CODE_0_0" FromRole="MST_CODEKBN" ToRole="MST_CODE" />
+        </EntityType>
+        <EntityType Name="MST_DATABASE_TYPE">
+          <Key>
+            <PropertyRef Name="DATABASE_ID" />
+          </Key>
+          <Property Name="DATABASE_ID" Type="Int64" Nullable="false" />
+          <Property Name="VERSION" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DATABASE_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MST_MENU">
           <Key>
@@ -420,17 +566,70 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBManageModelStoreContainer" CdmEntityContainer="DBManageEntities">
+          <EntitySetMapping Name="DBA_COLUMN">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_COLUMN">
+              <MappingFragment StoreEntitySet="DBA_COLUMN">
+                <ScalarProperty Name="INDEX_FLG" ColumnName="INDEX_FLG" />
+                <ScalarProperty Name="PKEY_FLG" ColumnName="PKEY_FLG" />
+                <ScalarProperty Name="SORT_NO" ColumnName="SORT_NO" />
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+                <ScalarProperty Name="POPULAR_NM" ColumnName="POPULAR_NM" />
+                <ScalarProperty Name="TYPE_NM" ColumnName="TYPE_NM" />
+                <ScalarProperty Name="COLUMN_NM" ColumnName="COLUMN_NM" />
+                <ScalarProperty Name="TABLE_ID" ColumnName="TABLE_ID" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="COLUMN_ID" ColumnName="COLUMN_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBA_PLAN">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_PLAN">
+              <MappingFragment StoreEntitySet="DBA_PLAN">
+                <ScalarProperty Name="PLAN_TIME" ColumnName="PLAN_TIME" />
+                <ScalarProperty Name="END_TIME" ColumnName="END_TIME" />
+                <ScalarProperty Name="START_TIME" ColumnName="START_TIME" />
+                <ScalarProperty Name="DETAILS" ColumnName="DETAILS" />
+                <ScalarProperty Name="PLAN_CD" ColumnName="PLAN_CD" />
+                <ScalarProperty Name="VISIBLE_CD" ColumnName="VISIBLE_CD" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="PLAN_ID" ColumnName="PLAN_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DBA_PROJECT">
             <EntityTypeMapping TypeName="DBManageModel.DBA_PROJECT">
               <MappingFragment StoreEntitySet="DBA_PROJECT">
                 <ScalarProperty Name="PROJECT_NM" ColumnName="PROJECT_NM" />
                 <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBA_TABLE">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_TABLE">
+              <MappingFragment StoreEntitySet="DBA_TABLE">
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+                <ScalarProperty Name="POPULAR_NM" ColumnName="POPULAR_NM" />
+                <ScalarProperty Name="TABLE_NM" ColumnName="TABLE_NM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="DATABASE_TYPE" ColumnName="DATABASE_TYPE" />
+                <ScalarProperty Name="TABLE_ID" ColumnName="TABLE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBA_TABLE_FOREIGN">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_TABLE_FOREIGN">
+              <MappingFragment StoreEntitySet="DBA_TABLE_FOREIGN">
+                <ScalarProperty Name="CHILD_TABLE_ID" ColumnName="CHILD_TABLE_ID" />
+                <ScalarProperty Name="PARENT_TABLE_ID" ColumnName="PARENT_TABLE_ID" />
+                <ScalarProperty Name="KEY_NM" ColumnName="KEY_NM" />
+                <ScalarProperty Name="KEY_ID" ColumnName="KEY_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -471,6 +670,17 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DBA_TODOKBN">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_TODOKBN">
+              <MappingFragment StoreEntitySet="DBA_TODOKBN">
+                <ScalarProperty Name="TODO_CD" ColumnName="TODO_CD" />
+                <ScalarProperty Name="KBN_NM" ColumnName="KBN_NM" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="PKBN_ID" ColumnName="PKBN_ID" />
+                <ScalarProperty Name="KBN_ID" ColumnName="KBN_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MST_CODE">
             <EntityTypeMapping TypeName="DBManageModel.MST_CODE">
               <MappingFragment StoreEntitySet="MST_CODE">
@@ -492,6 +702,15 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
                 <ScalarProperty Name="KBN_NMS" ColumnName="KBN_NMS" />
                 <ScalarProperty Name="KBN_NM" ColumnName="KBN_NM" />
                 <ScalarProperty Name="CODEKBN_ID" ColumnName="CODEKBN_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MST_DATABASE_TYPE">
+            <EntityTypeMapping TypeName="DBManageModel.MST_DATABASE_TYPE">
+              <MappingFragment StoreEntitySet="MST_DATABASE_TYPE">
+                <ScalarProperty Name="DATABASE_NM" ColumnName="DATABASE_NM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="DATABASE_ID" ColumnName="DATABASE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

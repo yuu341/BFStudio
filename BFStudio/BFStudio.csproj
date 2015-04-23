@@ -180,13 +180,28 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="App_Start\TicketAreaRegistration.cs" />
+    <Compile Include="Entity\DBA_COLUMN.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DBA_PLAN.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\DBA_PROJECT.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DBA_TABLE.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DBA_TABLE_FOREIGN.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\DBA_TICKET.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\DBA_TODO.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DBA_TODOKBN.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\DBManageModel.Context.cs">
@@ -208,6 +223,9 @@
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\MST_CODEKBN.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\MST_DATABASE_TYPE.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\MST_MENU.cs">
