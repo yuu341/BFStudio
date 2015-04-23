@@ -178,7 +178,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="App_Start\TicketAreaRegistration.cs" />
+    <Compile Include="Entity\DBA_PROJECT.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\DBA_TICKET.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DBA_TODO.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\DBManageModel.Context.cs">
@@ -209,7 +215,13 @@
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\p\MST_USER.cs" />
+    <Compile Include="Entity\V_CODELIST.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\V_TICKETLIST.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\V_TODOLIST.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -220,6 +232,10 @@
     <Compile Include="MainPages\RegisterUser\Controllers\RegisterUserController.cs" />
     <Compile Include="MainPages\Top\Controllers\TopController.cs" />
     <Compile Include="MainPages\Top\Models\TopModel.cs" />
+    <Compile Include="Pages\Todo\Controllers\TodoController.cs" />
+    <Compile Include="Pages\Todo\Models\DBA_TODO.cs" />
+    <Compile Include="Pages\Todo\Models\TodoModel.cs" />
+    <Compile Include="Pages\Todo\Models\V_TODOLIST.cs" />
     <Compile Include="Pages\TicketList\Controllers\TicketListController.cs" />
     <Compile Include="Pages\TicketList\Models\V_TICKETLIST.cs" />
     <Compile Include="Pages\TicketList\Models\DBA_TICKET.cs" />
@@ -286,6 +302,7 @@
       <DependentUpon>menu.css</DependentUpon>
     </Content>
     <Content Include="Scripts\CSSrefresh.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Pages\_ViewStart.cshtml" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
@@ -319,6 +336,7 @@
       <DependentUpon>calendar.css</DependentUpon>
     </Content>
     <Content Include="Pages\TicketList\Views\Index.cshtml" />
+    <Content Include="Pages\Todo\Views\Index.cshtml" />
     <None Include="Properties\PublishProfiles\YuuServer.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

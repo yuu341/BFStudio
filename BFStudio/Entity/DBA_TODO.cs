@@ -12,16 +12,13 @@ namespace BFStudio.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class MST_CODE
+    public partial class DBA_TODO
     {
-        public long CODE_ID { get; set; }
-        public long CODEKBN_ID { get; set; }
-        public string CODE_NM { get; set; }
-        public string CODE_NMS { get; set; }
-        public bool UNDISPLAY_FLG { get; set; }
-        public string COMMENT { get; set; }
-        public long SORT_NO { get; set; }
-    
-        public virtual MST_CODEKBN MST_CODEKBN { get; set; }
+        public long TODO_ID { get; set; }
+        public Nullable<long> USER_ID { get; set; }
+        public Nullable<long> PROJECT_ID { get; set; }
+        public string TITLE { get; set; }
+        public string DETAIL { get; set; }
+        public long STAGE { get; set; }
     }
 }

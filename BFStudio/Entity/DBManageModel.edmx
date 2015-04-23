@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBManageModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\sqlite\bf-db.sqlite3" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DBA_PROJECT">
+          <Key>
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="PROJECT_ID" Type="integer" Nullable="false" />
+          <Property Name="PROJECT_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
         <EntityType Name="DBA_TICKET">
           <Key>
             <PropertyRef Name="TICKET_ID" />
@@ -29,6 +36,17 @@
           <Property Name="DELETE_ID" Type="integer" />
           <Property Name="DELETE_TIME" Type="datetime" />
         </EntityType>
+        <EntityType Name="DBA_TODO">
+          <Key>
+            <PropertyRef Name="TODO_ID" />
+          </Key>
+          <Property Name="TODO_ID" Type="integer" Nullable="false" />
+          <Property Name="USER_ID" Type="integer" />
+          <Property Name="PROJECT_ID" Type="integer" />
+          <Property Name="TITLE" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="DETAIL" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="STAGE" Type="integer" Nullable="false" />
+        </EntityType>
         <EntityType Name="MST_CODE">
           <Key>
             <PropertyRef Name="CODE_ID" />
@@ -38,6 +56,8 @@
           <Property Name="CODE_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="CODE_NMS" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="UNDISPLAY_FLG" Type="bit" Nullable="false" />
+          <Property Name="COMMENT" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="SORT_NO" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="MST_CODEKBN">
           <Key>
@@ -47,6 +67,7 @@
           <Property Name="KBN_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="KBN_NMS" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="UNDISPLAY_FLG" Type="bit" Nullable="false" />
+          <Property Name="COMMENT" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <EntityType Name="MST_MENU">
           <Key>
@@ -72,6 +93,31 @@
           <Property Name="LOCKOUT_TIME" Type="datetime" />
         </EntityType>
         <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'main.V_CODELIST' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="V_CODELIST">
+          <Key>
+            <PropertyRef Name="CODEKBN_ID" />
+            <PropertyRef Name="KBN_NM" />
+            <PropertyRef Name="KBN_NMS" />
+            <PropertyRef Name="K_UNDISP" />
+            <PropertyRef Name="CODE_ID" />
+            <PropertyRef Name="CODE_NM" />
+            <PropertyRef Name="C_UNDISP" />
+            <PropertyRef Name="SORT_NO" />
+          </Key>
+          <Property Name="CODEKBN_ID" Type="integer" Nullable="false" />
+          <Property Name="KBN_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="KBN_NMS" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="K_UNDISP" Type="bit" Nullable="false" />
+          <Property Name="K_COMMENT" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="CODE_ID" Type="integer" Nullable="false" />
+          <Property Name="CODE_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="CODE_NMS" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="C_UNDISP" Type="bit" Nullable="false" />
+          <Property Name="C_COMMENT" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="SORT_NO" Type="integer" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
 警告 6002: テーブル/ビュー 'main.V_TICKETLIST' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
         <EntityType Name="V_TICKETLIST">
           <Key>
@@ -86,6 +132,24 @@
           <Property Name="TO_USER_ID" Type="integer" />
           <Property Name="TO_USER_NAME" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="TITLE" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'main.V_TODOLIST' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="V_TODOLIST">
+          <Key>
+            <PropertyRef Name="TODO_ID" />
+            <PropertyRef Name="TITLE" />
+            <PropertyRef Name="STAGE" />
+            <PropertyRef Name="CODE_NM" />
+            <PropertyRef Name="LOGIN_NM" />
+          </Key>
+          <Property Name="TODO_ID" Type="integer" Nullable="false" />
+          <Property Name="USER_ID" Type="integer" />
+          <Property Name="PROJECT_ID" Type="integer" />
+          <Property Name="TITLE" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="STAGE" Type="integer" Nullable="false" />
+          <Property Name="CODE_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="LOGIN_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
         </EntityType>
         <Association Name="FK_MST_CODE_0_0">
           <End Role="MST_CODEKBN" Type="Self.MST_CODEKBN" Multiplicity="1" />
@@ -112,11 +176,28 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBManageModelStoreContainer">
+          <EntitySet Name="DBA_PROJECT" EntityType="Self.DBA_PROJECT" store:Type="Tables" />
           <EntitySet Name="DBA_TICKET" EntityType="Self.DBA_TICKET" store:Type="Tables" />
+          <EntitySet Name="DBA_TODO" EntityType="Self.DBA_TODO" store:Type="Tables" />
           <EntitySet Name="MST_CODE" EntityType="Self.MST_CODE" store:Type="Tables" />
           <EntitySet Name="MST_CODEKBN" EntityType="Self.MST_CODEKBN" store:Type="Tables" />
           <EntitySet Name="MST_MENU" EntityType="Self.MST_MENU" store:Type="Tables" />
           <EntitySet Name="MST_USER" EntityType="Self.MST_USER" store:Type="Tables" />
+          <EntitySet Name="V_CODELIST" EntityType="Self.V_CODELIST" store:Type="Views">
+            <DefiningQuery>SELECT 
+[V_CODELIST].[CODEKBN_ID] AS [CODEKBN_ID], 
+[V_CODELIST].[KBN_NM] AS [KBN_NM], 
+[V_CODELIST].[KBN_NMS] AS [KBN_NMS], 
+[V_CODELIST].[K_UNDISP] AS [K_UNDISP], 
+[V_CODELIST].[K_COMMENT] AS [K_COMMENT], 
+[V_CODELIST].[CODE_ID] AS [CODE_ID], 
+[V_CODELIST].[CODE_NM] AS [CODE_NM], 
+[V_CODELIST].[CODE_NMS] AS [CODE_NMS], 
+[V_CODELIST].[C_UNDISP] AS [C_UNDISP], 
+[V_CODELIST].[C_COMMENT] AS [C_COMMENT], 
+[V_CODELIST].[SORT_NO] AS [SORT_NO]
+FROM [V_CODELIST] AS [V_CODELIST]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_TICKETLIST" EntityType="Self.V_TICKETLIST" store:Type="Views">
             <DefiningQuery>SELECT 
 [V_TICKETLIST].[TICKET_ID] AS [TICKET_ID], 
@@ -126,6 +207,17 @@
 [V_TICKETLIST].[TO_USER_NAME] AS [TO_USER_NAME], 
 [V_TICKETLIST].[TITLE] AS [TITLE]
 FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_TODOLIST" EntityType="Self.V_TODOLIST" store:Type="Views">
+            <DefiningQuery>SELECT 
+[V_TODOLIST].[TODO_ID] AS [TODO_ID], 
+[V_TODOLIST].[USER_ID] AS [USER_ID], 
+[V_TODOLIST].[PROJECT_ID] AS [PROJECT_ID], 
+[V_TODOLIST].[TITLE] AS [TITLE], 
+[V_TODOLIST].[STAGE] AS [STAGE], 
+[V_TODOLIST].[CODE_NM] AS [CODE_NM], 
+[V_TODOLIST].[LOGIN_NM] AS [LOGIN_NM]
+FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_MST_CODE_0_0" Association="Self.FK_MST_CODE_0_0">
             <End Role="MST_CODEKBN" EntitySet="MST_CODEKBN" />
@@ -141,10 +233,16 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="DBManageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBManageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DBA_PROJECT" EntityType="DBManageModel.DBA_PROJECT" />
+          <EntitySet Name="DBA_TICKET" EntityType="DBManageModel.DBA_TICKET" />
+          <EntitySet Name="DBA_TODO" EntityType="DBManageModel.DBA_TODO" />
           <EntitySet Name="MST_CODE" EntityType="DBManageModel.MST_CODE" />
           <EntitySet Name="MST_CODEKBN" EntityType="DBManageModel.MST_CODEKBN" />
           <EntitySet Name="MST_MENU" EntityType="DBManageModel.MST_MENU" />
           <EntitySet Name="MST_USER" EntityType="DBManageModel.MST_USER" />
+          <EntitySet Name="V_CODELIST" EntityType="DBManageModel.V_CODELIST" />
+          <EntitySet Name="V_TICKETLIST" EntityType="DBManageModel.V_TICKETLIST" />
+          <EntitySet Name="V_TODOLIST" EntityType="DBManageModel.V_TODOLIST" />
           <AssociationSet Name="FK_MST_CODE_0_0" Association="DBManageModel.FK_MST_CODE_0_0">
             <End Role="MST_CODEKBN" EntitySet="MST_CODEKBN" />
             <End Role="MST_CODE" EntitySet="MST_CODE" />
@@ -153,9 +251,49 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
             <End Role="MST_MENU" EntitySet="MST_MENU" />
             <End Role="MST_MENU1" EntitySet="MST_MENU" />
           </AssociationSet>
-          <EntitySet Name="DBA_TICKET" EntityType="DBManageModel.DBA_TICKET" />
-          <EntitySet Name="V_TICKETLIST" EntityType="DBManageModel.V_TICKETLIST" />
         </EntityContainer>
+        <EntityType Name="DBA_PROJECT">
+          <Key>
+            <PropertyRef Name="PROJECT_ID" />
+          </Key>
+          <Property Name="PROJECT_ID" Type="Int64" Nullable="false" />
+          <Property Name="PROJECT_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DBA_TICKET">
+          <Key>
+            <PropertyRef Name="TICKET_ID" />
+          </Key>
+          <Property Name="TICKET_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROJECT_ID" Type="Int64" />
+          <Property Name="TICKET_KBN" Type="Int64" />
+          <Property Name="PROJECT_KBN" Type="Int64" />
+          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DETAIL" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FROM_USER_ID" Type="Int64" Nullable="false" />
+          <Property Name="FROM_TIME" Type="DateTime" />
+          <Property Name="TO_USER_ID" Type="Int64" />
+          <Property Name="ANSWER_USER_ID" Type="Int64" />
+          <Property Name="ANSWER_TIME" Type="Int64" />
+          <Property Name="STATE" Type="Int64" Nullable="false" />
+          <Property Name="CREATE_ID" Type="Int64" />
+          <Property Name="CREATE_TIME" Type="DateTime" />
+          <Property Name="UPDATE_ID" Type="Int64" />
+          <Property Name="UPDATE_TIME" Type="DateTime" />
+          <Property Name="DELETE_FLG" Type="Boolean" />
+          <Property Name="DELETE_ID" Type="Int64" />
+          <Property Name="DELETE_TIME" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="DBA_TODO">
+          <Key>
+            <PropertyRef Name="TODO_ID" />
+          </Key>
+          <Property Name="TODO_ID" Type="Int64" Nullable="false" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="PROJECT_ID" Type="Int64" />
+          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DETAIL" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="STAGE" Type="Int64" Nullable="false" />
+        </EntityType>
         <EntityType Name="MST_CODE">
           <Key>
             <PropertyRef Name="CODE_ID" />
@@ -165,6 +303,8 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
           <Property Name="CODE_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="CODE_NMS" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="UNDISPLAY_FLG" Type="Boolean" Nullable="false" />
+          <Property Name="COMMENT" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="SORT_NO" Type="Int64" Nullable="false" />
           <NavigationProperty Name="MST_CODEKBN" Relationship="DBManageModel.FK_MST_CODE_0_0" FromRole="MST_CODE" ToRole="MST_CODEKBN" />
         </EntityType>
         <EntityType Name="MST_CODEKBN">
@@ -175,6 +315,7 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
           <Property Name="KBN_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="KBN_NMS" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="UNDISPLAY_FLG" Type="Boolean" Nullable="false" />
+          <Property Name="COMMENT" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MST_CODE" Relationship="DBManageModel.FK_MST_CODE_0_0" FromRole="MST_CODEKBN" ToRole="MST_CODE" />
         </EntityType>
         <EntityType Name="MST_MENU">
@@ -202,6 +343,59 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
           <Property Name="LOCKOUT_CNT" Type="Int64" Nullable="false" />
           <Property Name="LOCKOUT_TIME" Type="DateTime" />
         </EntityType>
+        <EntityType Name="V_CODELIST">
+          <Key>
+            <PropertyRef Name="CODEKBN_ID" />
+            <PropertyRef Name="KBN_NM" />
+            <PropertyRef Name="KBN_NMS" />
+            <PropertyRef Name="K_UNDISP" />
+            <PropertyRef Name="CODE_ID" />
+            <PropertyRef Name="CODE_NM" />
+            <PropertyRef Name="C_UNDISP" />
+            <PropertyRef Name="SORT_NO" />
+          </Key>
+          <Property Name="CODEKBN_ID" Type="Int64" Nullable="false" />
+          <Property Name="KBN_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="KBN_NMS" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="K_UNDISP" Type="Boolean" Nullable="false" />
+          <Property Name="K_COMMENT" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_ID" Type="Int64" Nullable="false" />
+          <Property Name="CODE_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_NMS" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="C_UNDISP" Type="Boolean" Nullable="false" />
+          <Property Name="C_COMMENT" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="SORT_NO" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_TICKETLIST">
+          <Key>
+            <PropertyRef Name="TICKET_ID" />
+            <PropertyRef Name="STATE" />
+            <PropertyRef Name="TO_USER_NAME" />
+            <PropertyRef Name="TITLE" />
+          </Key>
+          <Property Name="TICKET_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CREATE_TIME" Type="DateTime" />
+          <Property Name="STATE" Type="Int64" Nullable="false" />
+          <Property Name="TO_USER_ID" Type="Int64" />
+          <Property Name="TO_USER_NAME" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_TODOLIST">
+          <Key>
+            <PropertyRef Name="TODO_ID" />
+            <PropertyRef Name="TITLE" />
+            <PropertyRef Name="STAGE" />
+            <PropertyRef Name="CODE_NM" />
+            <PropertyRef Name="LOGIN_NM" />
+          </Key>
+          <Property Name="TODO_ID" Type="Int64" Nullable="false" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="PROJECT_ID" Type="Int64" />
+          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="STAGE" Type="Int64" Nullable="false" />
+          <Property Name="CODE_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="LOGIN_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
         <Association Name="FK_MST_CODE_0_0">
           <End Type="DBManageModel.MST_CODEKBN" Role="MST_CODEKBN" Multiplicity="1" />
           <End Type="DBManageModel.MST_CODE" Role="MST_CODE" Multiplicity="*" />
@@ -226,53 +420,62 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="DBA_TICKET">
-          <Key>
-            <PropertyRef Name="TICKET_ID" />
-          </Key>
-          <Property Name="TICKET_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PROJECT_ID" Type="Int64" />
-          <Property Name="TICKET_KBN" Type="Int64" />
-          <Property Name="PROJECT_KBN" Type="Int64" />
-          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="DETAIL" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="FROM_USER_ID" Type="Int64" Nullable="false" />
-          <Property Name="FROM_TIME" Type="DateTime" />
-          <Property Name="TO_USER_ID" Type="Int64" />
-          <Property Name="ANSWER_USER_ID" Type="Int64" />
-          <Property Name="ANSWER_TIME" Type="Int64" />
-          <Property Name="STATE" Type="Int64" Nullable="false" />
-          <Property Name="CREATE_ID" Type="Int64" />
-          <Property Name="CREATE_TIME" Type="DateTime" />
-          <Property Name="UPDATE_ID" Type="Int64" />
-          <Property Name="UPDATE_TIME" Type="DateTime" />
-          <Property Name="DELETE_FLG" Type="Boolean" />
-          <Property Name="DELETE_ID" Type="Int64" />
-          <Property Name="DELETE_TIME" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="V_TICKETLIST">
-          <Key>
-            <PropertyRef Name="TICKET_ID" />
-            <PropertyRef Name="STATE" />
-            <PropertyRef Name="TO_USER_NAME" />
-            <PropertyRef Name="TITLE" />
-          </Key>
-          <Property Name="TICKET_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CREATE_TIME" Type="DateTime" />
-          <Property Name="STATE" Type="Int64" Nullable="false" />
-          <Property Name="TO_USER_ID" Type="Int64" />
-          <Property Name="TO_USER_NAME" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="TITLE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBManageModelStoreContainer" CdmEntityContainer="DBManageEntities">
+          <EntitySetMapping Name="DBA_PROJECT">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_PROJECT">
+              <MappingFragment StoreEntitySet="DBA_PROJECT">
+                <ScalarProperty Name="PROJECT_NM" ColumnName="PROJECT_NM" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBA_TICKET">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_TICKET">
+              <MappingFragment StoreEntitySet="DBA_TICKET">
+                <ScalarProperty Name="DELETE_TIME" ColumnName="DELETE_TIME" />
+                <ScalarProperty Name="DELETE_ID" ColumnName="DELETE_ID" />
+                <ScalarProperty Name="DELETE_FLG" ColumnName="DELETE_FLG" />
+                <ScalarProperty Name="UPDATE_TIME" ColumnName="UPDATE_TIME" />
+                <ScalarProperty Name="UPDATE_ID" ColumnName="UPDATE_ID" />
+                <ScalarProperty Name="CREATE_TIME" ColumnName="CREATE_TIME" />
+                <ScalarProperty Name="CREATE_ID" ColumnName="CREATE_ID" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+                <ScalarProperty Name="ANSWER_TIME" ColumnName="ANSWER_TIME" />
+                <ScalarProperty Name="ANSWER_USER_ID" ColumnName="ANSWER_USER_ID" />
+                <ScalarProperty Name="TO_USER_ID" ColumnName="TO_USER_ID" />
+                <ScalarProperty Name="FROM_TIME" ColumnName="FROM_TIME" />
+                <ScalarProperty Name="FROM_USER_ID" ColumnName="FROM_USER_ID" />
+                <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="PROJECT_KBN" ColumnName="PROJECT_KBN" />
+                <ScalarProperty Name="TICKET_KBN" ColumnName="TICKET_KBN" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="TICKET_ID" ColumnName="TICKET_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBA_TODO">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_TODO">
+              <MappingFragment StoreEntitySet="DBA_TODO">
+                <ScalarProperty Name="STAGE" ColumnName="STAGE" />
+                <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="TODO_ID" ColumnName="TODO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MST_CODE">
             <EntityTypeMapping TypeName="DBManageModel.MST_CODE">
               <MappingFragment StoreEntitySet="MST_CODE">
+                <ScalarProperty Name="SORT_NO" ColumnName="SORT_NO" />
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
                 <ScalarProperty Name="UNDISPLAY_FLG" ColumnName="UNDISPLAY_FLG" />
                 <ScalarProperty Name="CODE_NMS" ColumnName="CODE_NMS" />
                 <ScalarProperty Name="CODE_NM" ColumnName="CODE_NM" />
@@ -284,6 +487,7 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
           <EntitySetMapping Name="MST_CODEKBN">
             <EntityTypeMapping TypeName="DBManageModel.MST_CODEKBN">
               <MappingFragment StoreEntitySet="MST_CODEKBN">
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
                 <ScalarProperty Name="UNDISPLAY_FLG" ColumnName="UNDISPLAY_FLG" />
                 <ScalarProperty Name="KBN_NMS" ColumnName="KBN_NMS" />
                 <ScalarProperty Name="KBN_NM" ColumnName="KBN_NM" />
@@ -316,28 +520,20 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DBA_TICKET">
-            <EntityTypeMapping TypeName="DBManageModel.DBA_TICKET">
-              <MappingFragment StoreEntitySet="DBA_TICKET">
-                <ScalarProperty Name="DELETE_TIME" ColumnName="DELETE_TIME" />
-                <ScalarProperty Name="DELETE_ID" ColumnName="DELETE_ID" />
-                <ScalarProperty Name="DELETE_FLG" ColumnName="DELETE_FLG" />
-                <ScalarProperty Name="UPDATE_TIME" ColumnName="UPDATE_TIME" />
-                <ScalarProperty Name="UPDATE_ID" ColumnName="UPDATE_ID" />
-                <ScalarProperty Name="CREATE_TIME" ColumnName="CREATE_TIME" />
-                <ScalarProperty Name="CREATE_ID" ColumnName="CREATE_ID" />
-                <ScalarProperty Name="STATE" ColumnName="STATE" />
-                <ScalarProperty Name="ANSWER_TIME" ColumnName="ANSWER_TIME" />
-                <ScalarProperty Name="ANSWER_USER_ID" ColumnName="ANSWER_USER_ID" />
-                <ScalarProperty Name="TO_USER_ID" ColumnName="TO_USER_ID" />
-                <ScalarProperty Name="FROM_TIME" ColumnName="FROM_TIME" />
-                <ScalarProperty Name="FROM_USER_ID" ColumnName="FROM_USER_ID" />
-                <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
-                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
-                <ScalarProperty Name="PROJECT_KBN" ColumnName="PROJECT_KBN" />
-                <ScalarProperty Name="TICKET_KBN" ColumnName="TICKET_KBN" />
-                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
-                <ScalarProperty Name="TICKET_ID" ColumnName="TICKET_ID" />
+          <EntitySetMapping Name="V_CODELIST">
+            <EntityTypeMapping TypeName="DBManageModel.V_CODELIST">
+              <MappingFragment StoreEntitySet="V_CODELIST">
+                <ScalarProperty Name="SORT_NO" ColumnName="SORT_NO" />
+                <ScalarProperty Name="C_COMMENT" ColumnName="C_COMMENT" />
+                <ScalarProperty Name="C_UNDISP" ColumnName="C_UNDISP" />
+                <ScalarProperty Name="CODE_NMS" ColumnName="CODE_NMS" />
+                <ScalarProperty Name="CODE_NM" ColumnName="CODE_NM" />
+                <ScalarProperty Name="CODE_ID" ColumnName="CODE_ID" />
+                <ScalarProperty Name="K_COMMENT" ColumnName="K_COMMENT" />
+                <ScalarProperty Name="K_UNDISP" ColumnName="K_UNDISP" />
+                <ScalarProperty Name="KBN_NMS" ColumnName="KBN_NMS" />
+                <ScalarProperty Name="KBN_NM" ColumnName="KBN_NM" />
+                <ScalarProperty Name="CODEKBN_ID" ColumnName="CODEKBN_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -350,6 +546,19 @@ FROM [V_TICKETLIST] AS [V_TICKETLIST]</DefiningQuery>
                 <ScalarProperty Name="STATE" ColumnName="STATE" />
                 <ScalarProperty Name="CREATE_TIME" ColumnName="CREATE_TIME" />
                 <ScalarProperty Name="TICKET_ID" ColumnName="TICKET_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_TODOLIST">
+            <EntityTypeMapping TypeName="DBManageModel.V_TODOLIST">
+              <MappingFragment StoreEntitySet="V_TODOLIST">
+                <ScalarProperty Name="LOGIN_NM" ColumnName="LOGIN_NM" />
+                <ScalarProperty Name="CODE_NM" ColumnName="CODE_NM" />
+                <ScalarProperty Name="STAGE" ColumnName="STAGE" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="TODO_ID" ColumnName="TODO_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

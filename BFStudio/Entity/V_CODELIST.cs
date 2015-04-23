@@ -12,21 +12,18 @@ namespace BFStudio.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class MST_CODEKBN
+    public partial class V_CODELIST
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MST_CODEKBN()
-        {
-            this.MST_CODE = new HashSet<MST_CODE>();
-        }
-    
         public long CODEKBN_ID { get; set; }
         public string KBN_NM { get; set; }
         public string KBN_NMS { get; set; }
-        public bool UNDISPLAY_FLG { get; set; }
-        public string COMMENT { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MST_CODE> MST_CODE { get; set; }
+        public bool K_UNDISP { get; set; }
+        public string K_COMMENT { get; set; }
+        public long CODE_ID { get; set; }
+        public string CODE_NM { get; set; }
+        public string CODE_NMS { get; set; }
+        public bool C_UNDISP { get; set; }
+        public string C_COMMENT { get; set; }
+        public long SORT_NO { get; set; }
     }
 }

@@ -1,0 +1,35 @@
+﻿@model BFStudio.Pages.Todo.Models.TodoModel
+
+@{
+    ViewBag.Title ="TODO";
+}
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Content/datatable")
+@Scripts.Render("~/bundles/datatable")
+<div>
+    <table id="todo-list" class="display">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(m => m.TodoList.FirstOrDefault().TITLE)</th>
+                <th>@Html.LabelFor(m => m.TodoList.FirstOrDefault().STAGE)</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var each in Model.TodoList)
+            {
+                <tr>
+                    <td>@each.TITLE</td>
+                    <td>@each.STAGE</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/blockui")
+    @Scripts.Render("~/bundles/jqueryval")
+}

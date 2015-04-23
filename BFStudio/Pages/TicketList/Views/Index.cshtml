@@ -3,25 +3,22 @@
 @{
     ViewBag.Title ="チケット管理";
 }
+@Scripts.Render("~/bundles/jquery")
 @Styles.Render("~/Content/datatable")
 @Scripts.Render("~/bundles/datatable")
+
 <script>
     $(document).ready(function () {
+        var table = $("#todo-list").CreateTable();
 
-        var table = $('#example').DataTable();
+        table.RecordSize(10);
+        table.CanSort(true);
 
-        $('#example tbody').on('click', 'tr', function () {
-            $(this).toggleClass('selected');
-        });
-
-        $('#button').click(function () {
-            alert(table.rows('.selected').data().length + ' row(s) selected');
-        });
 
     });
 </script>
 <div>
-    <table id="example" class="display">
+    <table id="todo-list" class="display">
         <thead>
             <tr>
                 <th>@Html.LabelFor(m => m.TicketList.FirstOrDefault().CREATE_TIME)</th>
@@ -47,6 +44,8 @@
         </tbody>
     </table>
 </div>
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/blockui")
     @Scripts.Render("~/bundles/jqueryval")
