@@ -28,6 +28,7 @@ namespace BFStudio.Utility.MVC
         {
             get
             {
+                return new DBManageEntities().MST_USER.ToList();
                 if (GetCache() == null)
                 {
                     using (var ent = new DBManageEntities())
