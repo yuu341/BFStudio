@@ -3,77 +3,52 @@
 @{
     ViewBag.Title = "トップ";
 
-    string[] weekley = {
-                       "日曜日",
-                       "月曜日",
-                       "火曜日",
-                       "水曜日",
-                       "木曜日",
-                       "金曜日",
-                       "土曜日"
-                       };
-    string[] weekley_class = {
-                       "sunday",
-                       "weekday",
-                       "weekday",
-                       "weekday",
-                       "weekday",
-                       "weekday",
-                       "saturday"
-                       };
 }
-@Styles.Render("~/bundles/calendar")
-@using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "main" }))
-{
-    <div class="calendar-body">
-        <div class="disp-date">
-            <input type="text" value="2012">
-            <label>年</label>
-            <input type="text" value="12">
-            <label>月</label>
-            <input type="text" value="11">
-            <label>日</label>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    @for (int i = 0; i < 7; i++)
-                    {
-                        <th>
-                            <div class="@weekley_class[i]">
-                                <label>@weekley[i]</label>
-                            </div>
-                        </th>
-                    }
-                </tr>
-            </thead>
 
-            <tbody>
-                @for (int i = 0; i < 5; i++)
-                {
-                <tr>
-                    @for (int j = 1; j <= 7; j++)
-                    {
-                    <td>
-                        <div class="@weekley_class[j-1]">
-                            <div><label>@(j * i + j)</label></div>
-                            <div class="your-plan"><label>あなたの予定</label></div>
-                            <div class="other-plan"><label>みんなの予定</label></div>
-                        </div>
-                    </td>
-                    }
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    @*<div>
-        <h2>課題</h2>
-    </div>
-    <div>
-        <h2>プロジェクト</h2>
-    </div>
-    <div>
-        <h2>記事</h2>
-    </div>*@
+@section Scripts {
+
+<script type="text/javascript">
+    $(function () {
+        var con = $.connection("/chat");
+        con.start(function () {
+            $("#chat-send").click(function () {
+                var sender = $("#chat-send");
+                var msgr = $("#chat-msg");
+                var msg = msgr.val();
+                
+                con.send(msg);
+
+                msgr.val(null);
+
+            });
+        });
+
+        con.received(function (msg) {
+
+            var list = $("#chat-hist");
+
+            list.append("<div>" + getTemplate("user-info","") + getTemplate("",msg) + "</div>");
+        });
+    });
+
+    function getTemplate(id, msg) {
+        var temp = $("#" + id);
+        temp.find(".template").html = msg;
+        return temp;
+    }
+</script>
+
 }
+
+<ul id="user-info" style="display:none"><li><label class="template"></label></li></ul>
+<ul id="msg" style="display:none"><li><label class="template"></label></li></ul>
+<div>
+    <div id="chat-hist">
+        
+    </div>
+    <div>
+        
+        <input id="chat-msg" type="text"/>
+        <input id="chat-send" type="button" value="送信"/>
+    </div>
+</div>

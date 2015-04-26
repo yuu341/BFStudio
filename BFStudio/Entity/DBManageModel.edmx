@@ -5,6 +5,34 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBManageModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\sqlite\bf-db.sqlite3" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DBA_CHAT">
+          <Key>
+            <PropertyRef Name="CHAT_ID" />
+          </Key>
+          <Property Name="CHAT_ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROOM_ID" Type="integer" Nullable="false" />
+          <Property Name="SEND_USER_ID" Type="integer" Nullable="false" />
+          <Property Name="USER_MSG" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="CREATE_DATE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBA_CHATMEMBER">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+            <PropertyRef Name="MEMBER_ID" />
+          </Key>
+          <Property Name="ROOM_ID" Type="integer" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBA_CHATROOM">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+          </Key>
+          <Property Name="ROOM_ID" Type="integer" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="integer" />
+          <Property Name="ROOM_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="CREATE_TIME" Type="datetime" Nullable="false" />
+          <Property Name="VISIBILITY" Type="integer" Nullable="false" />
+        </EntityType>
         <EntityType Name="DBA_COLUMN">
           <Key>
             <PropertyRef Name="COLUMN_ID" />
@@ -160,6 +188,39 @@
           <Property Name="LOCKOUT_TIME" Type="datetime" />
         </EntityType>
         <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'main.V_CHATMSG' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="V_CHATMSG">
+          <Key>
+            <PropertyRef Name="CHAT_ID" />
+            <PropertyRef Name="ROOM_ID" />
+            <PropertyRef Name="SEND_USER_ID" />
+            <PropertyRef Name="USER_MSG" />
+            <PropertyRef Name="CREATE_DATE" />
+            <PropertyRef Name="SEND_USER_NM" />
+          </Key>
+          <Property Name="CHAT_ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROOM_ID" Type="integer" Nullable="false" />
+          <Property Name="SEND_USER_ID" Type="integer" Nullable="false" />
+          <Property Name="USER_MSG" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="CREATE_DATE" Type="datetime" Nullable="false" />
+          <Property Name="SEND_USER_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'main.V_CHATROOM' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="V_CHATROOM">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+            <PropertyRef Name="MEMBER_ID" />
+            <PropertyRef Name="ROOM_NM" />
+            <PropertyRef Name="LOGIN_NM" />
+          </Key>
+          <Property Name="ROOM_ID" Type="integer" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="integer" Nullable="false" />
+          <Property Name="ROOM_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="integer" />
+          <Property Name="LOGIN_NM" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
 警告 6002: テーブル/ビュー 'main.V_CODELIST' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
         <EntityType Name="V_CODELIST">
           <Key>
@@ -243,6 +304,9 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBManageModelStoreContainer">
+          <EntitySet Name="DBA_CHAT" EntityType="Self.DBA_CHAT" store:Type="Tables" />
+          <EntitySet Name="DBA_CHATMEMBER" EntityType="Self.DBA_CHATMEMBER" store:Type="Tables" />
+          <EntitySet Name="DBA_CHATROOM" EntityType="Self.DBA_CHATROOM" store:Type="Tables" />
           <EntitySet Name="DBA_COLUMN" EntityType="Self.DBA_COLUMN" store:Type="Tables" />
           <EntitySet Name="DBA_PLAN" EntityType="Self.DBA_PLAN" store:Type="Tables" />
           <EntitySet Name="DBA_PROJECT" EntityType="Self.DBA_PROJECT" store:Type="Tables" />
@@ -256,6 +320,25 @@
           <EntitySet Name="MST_DATABASE_TYPE" EntityType="Self.MST_DATABASE_TYPE" store:Type="Tables" />
           <EntitySet Name="MST_MENU" EntityType="Self.MST_MENU" store:Type="Tables" />
           <EntitySet Name="MST_USER" EntityType="Self.MST_USER" store:Type="Tables" />
+          <EntitySet Name="V_CHATMSG" EntityType="Self.V_CHATMSG" store:Type="Views">
+            <DefiningQuery>SELECT 
+[V_CHATMSG].[CHAT_ID] AS [CHAT_ID], 
+[V_CHATMSG].[ROOM_ID] AS [ROOM_ID], 
+[V_CHATMSG].[SEND_USER_ID] AS [SEND_USER_ID], 
+[V_CHATMSG].[USER_MSG] AS [USER_MSG], 
+[V_CHATMSG].[CREATE_DATE] AS [CREATE_DATE], 
+[V_CHATMSG].[SEND_USER_NM] AS [SEND_USER_NM]
+FROM [V_CHATMSG] AS [V_CHATMSG]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_CHATROOM" EntityType="Self.V_CHATROOM" store:Type="Views">
+            <DefiningQuery>SELECT 
+[V_CHATROOM].[ROOM_ID] AS [ROOM_ID], 
+[V_CHATROOM].[MEMBER_ID] AS [MEMBER_ID], 
+[V_CHATROOM].[ROOM_NM] AS [ROOM_NM], 
+[V_CHATROOM].[PROJECT_ID] AS [PROJECT_ID], 
+[V_CHATROOM].[LOGIN_NM] AS [LOGIN_NM]
+FROM [V_CHATROOM] AS [V_CHATROOM]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_CODELIST" EntityType="Self.V_CODELIST" store:Type="Views">
             <DefiningQuery>SELECT 
 [V_CODELIST].[CODEKBN_ID] AS [CODEKBN_ID], 
@@ -306,6 +389,9 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="DBManageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBManageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DBA_CHAT" EntityType="DBManageModel.DBA_CHAT" />
+          <EntitySet Name="DBA_CHATMEMBER" EntityType="DBManageModel.DBA_CHATMEMBER" />
+          <EntitySet Name="DBA_CHATROOM" EntityType="DBManageModel.DBA_CHATROOM" />
           <EntitySet Name="DBA_COLUMN" EntityType="DBManageModel.DBA_COLUMN" />
           <EntitySet Name="DBA_PLAN" EntityType="DBManageModel.DBA_PLAN" />
           <EntitySet Name="DBA_PROJECT" EntityType="DBManageModel.DBA_PROJECT" />
@@ -319,6 +405,8 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
           <EntitySet Name="MST_DATABASE_TYPE" EntityType="DBManageModel.MST_DATABASE_TYPE" />
           <EntitySet Name="MST_MENU" EntityType="DBManageModel.MST_MENU" />
           <EntitySet Name="MST_USER" EntityType="DBManageModel.MST_USER" />
+          <EntitySet Name="V_CHATMSG" EntityType="DBManageModel.V_CHATMSG" />
+          <EntitySet Name="V_CHATROOM" EntityType="DBManageModel.V_CHATROOM" />
           <EntitySet Name="V_CODELIST" EntityType="DBManageModel.V_CODELIST" />
           <EntitySet Name="V_TICKETLIST" EntityType="DBManageModel.V_TICKETLIST" />
           <EntitySet Name="V_TODOLIST" EntityType="DBManageModel.V_TODOLIST" />
@@ -331,6 +419,34 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
             <End Role="MST_MENU1" EntitySet="MST_MENU" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DBA_CHAT">
+          <Key>
+            <PropertyRef Name="CHAT_ID" />
+          </Key>
+          <Property Name="CHAT_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROOM_ID" Type="Int64" Nullable="false" />
+          <Property Name="SEND_USER_ID" Type="Int64" Nullable="false" />
+          <Property Name="USER_MSG" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CREATE_DATE" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBA_CHATMEMBER">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+            <PropertyRef Name="MEMBER_ID" />
+          </Key>
+          <Property Name="ROOM_ID" Type="Int64" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBA_CHATROOM">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+          </Key>
+          <Property Name="ROOM_ID" Type="Int64" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="Int64" />
+          <Property Name="ROOM_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CREATE_TIME" Type="DateTime" Nullable="false" />
+          <Property Name="VISIBILITY" Type="Int64" Nullable="false" />
+        </EntityType>
         <EntityType Name="DBA_COLUMN">
           <Key>
             <PropertyRef Name="COLUMN_ID" />
@@ -489,6 +605,35 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
           <Property Name="LOCKOUT_CNT" Type="Int64" Nullable="false" />
           <Property Name="LOCKOUT_TIME" Type="DateTime" />
         </EntityType>
+        <EntityType Name="V_CHATMSG">
+          <Key>
+            <PropertyRef Name="CHAT_ID" />
+            <PropertyRef Name="ROOM_ID" />
+            <PropertyRef Name="SEND_USER_ID" />
+            <PropertyRef Name="USER_MSG" />
+            <PropertyRef Name="CREATE_DATE" />
+            <PropertyRef Name="SEND_USER_NM" />
+          </Key>
+          <Property Name="CHAT_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROOM_ID" Type="Int64" Nullable="false" />
+          <Property Name="SEND_USER_ID" Type="Int64" Nullable="false" />
+          <Property Name="USER_MSG" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CREATE_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="SEND_USER_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_CHATROOM">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+            <PropertyRef Name="MEMBER_ID" />
+            <PropertyRef Name="ROOM_NM" />
+            <PropertyRef Name="LOGIN_NM" />
+          </Key>
+          <Property Name="ROOM_ID" Type="Int64" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="Int64" Nullable="false" />
+          <Property Name="ROOM_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="PROJECT_ID" Type="Int64" />
+          <Property Name="LOGIN_NM" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="V_CODELIST">
           <Key>
             <PropertyRef Name="CODEKBN_ID" />
@@ -572,6 +717,36 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBManageModelStoreContainer" CdmEntityContainer="DBManageEntities">
+          <EntitySetMapping Name="DBA_CHAT">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_CHAT">
+              <MappingFragment StoreEntitySet="DBA_CHAT">
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="USER_MSG" ColumnName="USER_MSG" />
+                <ScalarProperty Name="SEND_USER_ID" ColumnName="SEND_USER_ID" />
+                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
+                <ScalarProperty Name="CHAT_ID" ColumnName="CHAT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBA_CHATMEMBER">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_CHATMEMBER">
+              <MappingFragment StoreEntitySet="DBA_CHATMEMBER">
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBA_CHATROOM">
+            <EntityTypeMapping TypeName="DBManageModel.DBA_CHATROOM">
+              <MappingFragment StoreEntitySet="DBA_CHATROOM">
+                <ScalarProperty Name="VISIBILITY" ColumnName="VISIBILITY" />
+                <ScalarProperty Name="CREATE_TIME" ColumnName="CREATE_TIME" />
+                <ScalarProperty Name="ROOM_NM" ColumnName="ROOM_NM" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DBA_COLUMN">
             <EntityTypeMapping TypeName="DBManageModel.DBA_COLUMN">
               <MappingFragment StoreEntitySet="DBA_COLUMN">
@@ -736,6 +911,29 @@ FROM [V_TODOLIST] AS [V_TODOLIST]</DefiningQuery>
                 <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
                 <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_CHATMSG">
+            <EntityTypeMapping TypeName="DBManageModel.V_CHATMSG">
+              <MappingFragment StoreEntitySet="V_CHATMSG">
+                <ScalarProperty Name="SEND_USER_NM" ColumnName="SEND_USER_NM" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="USER_MSG" ColumnName="USER_MSG" />
+                <ScalarProperty Name="SEND_USER_ID" ColumnName="SEND_USER_ID" />
+                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
+                <ScalarProperty Name="CHAT_ID" ColumnName="CHAT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_CHATROOM">
+            <EntityTypeMapping TypeName="DBManageModel.V_CHATROOM">
+              <MappingFragment StoreEntitySet="V_CHATROOM">
+                <ScalarProperty Name="LOGIN_NM" ColumnName="LOGIN_NM" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="ROOM_NM" ColumnName="ROOM_NM" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,80 @@
+﻿@model BFStudio.Pages.ChatRoom.Models.ChatRoomModel
+
+@{
+    ViewBag.Title = "チャット";
+    var signalPath = @BFStudio.Pages.ChatRoom.Signal.ChatConnection.Path;
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+            var con = $.connection("/signal/chat");
+            con.start(function () {
+                $("#chat-send").click(function () {
+                    sendMsg(con);
+                });
+
+                $("#chat-msg").keydown(function (e) {
+                    if (e.ctrlKey && e.keyCode == 13) {
+                        sendMsg(con);
+                    }
+                });
+            });
+
+            con.received(function (data) {
+
+                var list = $("#chat-hist");
+                list.append("<div class=\"record\">" + getTemplate("user-info", data.SEND_USER_NM) + getTemplate("msg", data.USER_MSG) + "</div>");
+            });
+
+        });
+
+        function getTemplate(cls, msg) {
+            return "<ul class=\""+ cls +"\"><li><label>" + msg + "</label></li></ul>"
+
+            return temp;
+        }
+
+        function sendMsg(con) {
+            var sender = $("#chat-send");
+            var msgr = $("#chat-msg");
+            var msg = msgr.val();
+
+            var obj = {
+                CHAT_ID: 0,
+                ROOM_ID: 0,
+                SEND_USER_ID: 0,
+                CREATE_DATE: new Date(),
+                SEND_USER_NM: "",
+                USER_MSG: msg,
+
+            }
+            con.send(obj);
+
+            msgr.val(null);
+
+            msgr.focus();
+
+        }
+    </script>
+
+}
+
+<ul id="user-info" style="display:none"><li><label class="template"></label></li></ul>
+<ul id="msg" style="display:none"><li><label class="template"></label></li></ul>
+<div>
+    <div id="chat-hist">
+        @foreach (var msg in @Model.MessageList)
+        {
+            <div class="record">
+                <ul class="user-info"><li><label>@msg.SEND_USER_NM</label></li></ul><ul class="msg"><li><label>@msg.USER_MSG</label></li></ul>
+            </div>
+
+        }
+    </div>
+    <div id="user-input-space">
+        <input id="chat-msg" type="text" />
+        <input id="chat-send" type="button" value="送信" />
+    </div>
+</div>

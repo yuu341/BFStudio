@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BFStudio.Utility.MVC
 {
-    public class Constants
+    public class SystemCacheManager
     {
         public static List<MST_MENU> MenuList
         {
@@ -24,6 +24,31 @@ namespace BFStudio.Utility.MVC
             }
         }
 
+        public static List<MST_USER> UserList
+        {
+            get
+            {
+                if (GetCache() == null)
+                {
+                    using (var ent = new DBManageEntities())
+                    {
+                        SetCache(ent.MST_USER.ToList());
+                    }
+                }
+                return GetCache() as List<MST_USER>;
+            }
+        }
+
+        public static MST_USER GetUser(string login_id)
+        {
+            var user = UserList.SingleOrDefault(p => p.LOGIN_ID == login_id);
+
+            if (user == null)
+            {
+                user = UserList.Single(p => p.LOGIN_ID == "empty");
+            }
+            return user;
+        }
 
         private static object GetCache([CallerMemberName]string key = "")
         {

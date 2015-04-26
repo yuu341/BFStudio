@@ -25,6 +25,9 @@ namespace BFStudio.Entity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<DBA_CHAT> DBA_CHAT { get; set; }
+        public virtual DbSet<DBA_CHATMEMBER> DBA_CHATMEMBER { get; set; }
+        public virtual DbSet<DBA_CHATROOM> DBA_CHATROOM { get; set; }
         public virtual DbSet<DBA_COLUMN> DBA_COLUMN { get; set; }
         public virtual DbSet<DBA_PLAN> DBA_PLAN { get; set; }
         public virtual DbSet<DBA_PROJECT> DBA_PROJECT { get; set; }
@@ -38,6 +41,8 @@ namespace BFStudio.Entity
         public virtual DbSet<MST_DATABASE_TYPE> MST_DATABASE_TYPE { get; set; }
         public virtual DbSet<MST_MENU> MST_MENU { get; set; }
         public virtual DbSet<MST_USER> MST_USER { get; set; }
+        public virtual DbSet<V_CHATMSG> V_CHATMSG { get; set; }
+        public virtual DbSet<V_CHATROOM> V_CHATROOM { get; set; }
         public virtual DbSet<V_CODELIST> V_CODELIST { get; set; }
         public virtual DbSet<V_TICKETLIST> V_TICKETLIST { get; set; }
         public virtual DbSet<V_TODOLIST> V_TODOLIST { get; set; }

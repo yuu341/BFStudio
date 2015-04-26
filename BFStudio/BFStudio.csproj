@@ -54,6 +54,12 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -180,6 +186,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="App_Start\TicketAreaRegistration.cs" />
+    <Compile Include="Entity\DBA_CHAT.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DBA_CHATMEMBER.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DBA_CHATROOM.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\DBA_COLUMN.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
@@ -235,6 +250,12 @@
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\p\MST_USER.cs" />
+    <Compile Include="Entity\V_CHATMSG.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\V_CHATROOM.cs">
+      <DependentUpon>DBManageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\V_CODELIST.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
@@ -252,6 +273,11 @@
     <Compile Include="MainPages\RegisterUser\Controllers\RegisterUserController.cs" />
     <Compile Include="MainPages\Top\Controllers\TopController.cs" />
     <Compile Include="MainPages\Top\Models\TopModel.cs" />
+    <Compile Include="Pages\Database\Controllers\DatabaseController.cs" />
+    <Compile Include="Pages\ChatRoom\Controllers\ChatRoomController.cs" />
+    <Compile Include="Pages\ChatRoom\Models\ChatRoomModel.cs" />
+    <Compile Include="Pages\Schedule\Controllers\ScheduleController.cs" />
+    <Compile Include="Pages\Schedule\Models\ScheduleModel.cs" />
     <Compile Include="Pages\Todo\Controllers\TodoController.cs" />
     <Compile Include="Pages\Todo\Models\DBA_TODO.cs" />
     <Compile Include="Pages\Todo\Models\TodoModel.cs" />
@@ -263,13 +289,15 @@
     <Compile Include="Pages\UserSettings\Controllers\UserSettingsController.cs" />
     <Compile Include="Pages\UserSettings\Models\UserSettingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pages\ChatRoom\Signal\ChatConnection.cs" />
+    <Compile Include="Signal\InfoConnection.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\Manager\ApplicationUserManager.cs" />
     <Compile Include="Utility\Manager\BFStudioUserStore.cs" />
     <Compile Include="Utility\Manager\Logging.cs" />
     <Compile Include="Utility\MVC\BaseModel.cs" />
     <Compile Include="Utility\MVC\BaseController.cs" />
-    <Compile Include="Utility\MVC\Constants.cs" />
+    <Compile Include="Utility\MVC\SystemCacheManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -311,6 +339,9 @@
     </Content>
     <None Include="Content\Site.less" />
     <Content Include="Log4Net.Config.xml" />
+    <Content Include="Pages\ChatRoom\Views\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="MainPages\Top\Views\Index.cshtml" />
@@ -326,6 +357,8 @@
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Pages\_ViewStart.cshtml" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -357,6 +390,7 @@
     </Content>
     <Content Include="Pages\TicketList\Views\Index.cshtml" />
     <Content Include="Pages\Todo\Views\Index.cshtml" />
+    <Content Include="Pages\Schedule\Views\Index.cshtml" />
     <None Include="Properties\PublishProfiles\YuuServer.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -387,7 +421,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="MainPages\RegisterUser\Models\" />
-    <Folder Include="Pages\Database\Controllers\" />
     <Folder Include="Pages\Database\Models\" />
     <Folder Include="Pages\Database\Views\" />
     <Folder Include="Pages\Tickets\Controllers\" />
