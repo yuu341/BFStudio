@@ -4,7 +4,7 @@
 
     <!-- 通常ログ：単一ファイル出力 -->
     <appender name="InfoLogDailyAppender" type="log4net.Appender.FileAppender">
-      <File value="./Logs/Info.log" />
+      <File value="C:\Logs\Info.log" />
 
       <AppendToFile value="true" />
 
@@ -21,7 +21,7 @@
     <!-- エラーログ：分割ファイル出力 -->
     <appender name="ErrorLogDailyAppender" type="log4net.Appender.RollingFileAppender">
       <!-- ファイル名は日付ごと -->
-      <param name="File" value="./Logs/Error_" />
+      <param name="File" value="C:\Logs\Error_" />
       <param name="DatePattern" value='yyyyMMdd".log"' />
       <param name="RollingStyle" value="date" />
       <param name="StaticLogFileName" value="false" />
@@ -45,7 +45,7 @@
     <appender name="DebugLogDailyAppender" type="log4net.Appender.RollingFileAppender">
 
       <!-- ファイル名は日付ごと -->
-      <param name="File" value="./Logs/Trace_" />
+      <param name="File" value="C:\Logs\Trace_" />
       <param name="DatePattern" value='yyyyMMdd".log"' />
       <param name="RollingStyle" value="date" />
       <param name="StaticLogFileName" value="false" />

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace BFStudio.MainPages.RegisterUser.Controllers
 {
+    [Authorize]
     public class RegisterUserController : BaseController
     {
         //private Entities db = new Entities();
@@ -35,11 +36,13 @@ namespace BFStudio.MainPages.RegisterUser.Controllers
         //    return View(dBA_USER);
         //}
 
-        // GET: RegisterUser/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        // GET: RegisterUser/Createxs
+
+        //[HttpPost]
+        //public PartialViewResult Create(CreateUserModel model)
+        //{
+        //    return PartialView(model);
+        //}
 
         // POST: RegisterUser/Create
         // 過多ポスティング攻撃を防止するには、バインド先とする特定のプロパティを有効にしてください。

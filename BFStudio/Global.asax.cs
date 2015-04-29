@@ -1,4 +1,5 @@
 ﻿using BFStudio.App_Start;
+using BFStudio.Utility.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,16 @@ namespace BFStudio
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new BFViewEngine());
+
+        }
+
+        protected void Application_Error()
+        {
+            var e  = this.Server.GetLastError();
+
+
+            Logging.Logger.Error(e.Message);
+            Logging.Logger.Error(e.InnerException);
 
         }
 

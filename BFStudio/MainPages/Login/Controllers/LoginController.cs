@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BFStudio.Entity;
 using BFStudio.Utility.MVC;
+using System;
 
 namespace BFStudio.MainPages.Login.Controllers
 {
@@ -16,10 +17,10 @@ namespace BFStudio.MainPages.Login.Controllers
     {
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
+            //if (Url.IsLocalUrl(returnUrl))
+            //{
+            //    return Redirect(returnUrl);
+            //}
             return RedirectToAction("Index", "Top");
         }
 
@@ -34,15 +35,60 @@ namespace BFStudio.MainPages.Login.Controllers
         }
 
 
-        [AllowAnonymous]
         public ActionResult LogOff()
         {
             var authentication = this.HttpContext.GetOwinContext().Authentication;
             authentication.SignOut();
 
-            return RedirectToLocal("/");
+            return Redirect("/");
+            //return RedirectToLocal("/");
             
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Create(CreateUserModel model)
+        {
+            this.ModelState.Clear();
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(CreateUserModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return PartialView(model);
+            }
+
+            using (var ent = new DBManageEntities())
+            {
+                try
+                {
+                    PasswordHasher hash = new PasswordHasher();
+                    ent.MST_USER.Add(new MST_USER()
+                    {
+                        LOGIN_ID = model.LoginId,
+                        LOGIN_NM = model.UserName,
+                        PASSWORD = hash.HashPassword(model.Password),
+                        LOCKOUT_FLG = false,
+                        LOCKOUT_CNT = 0,
+                    });
+
+                    ent.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    var test = e.InnerException;
+                    var test2 = e.Message;
+
+                }
+            }
+            return new EmptyResult();
+        }
+        
 
         [HttpPost]
         [AllowAnonymous]

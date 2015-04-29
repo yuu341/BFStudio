@@ -1,17 +1,10 @@
-﻿body{
-    text-align:center;
-    
-    width:100%;
+﻿
+.modal{
+    overflow: auto;
 }
-
-div.login{
-    margin: 0 auto;
-    width:1000px;
-    .main{
-        margin-top:400px;
-        border-style:solid;
-        border-radius:5px;
-    }
+#login-logo{
+    margin-top:30px;
+    margin-bottom:30px;
 }
 #user-input-space{
     margin: 0 auto;
@@ -70,4 +63,23 @@ div.login{
             margin:0;
         }
     }
+}
+
+    #container .modal.fade {
+         left: -25%;
+          -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+             -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+               -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+                  transition: opacity 0.3s linear, left 0.3s ease-out;
+    }
+    #container .modal.fade.in {
+        left: 50%;
+    }
+    #container .modal-body {
+        max-height: 50px;
+    }
+    #article-editor {
+    width: 600px;
+    margin-left: -300px;
+    margin-right: -300px;
 }

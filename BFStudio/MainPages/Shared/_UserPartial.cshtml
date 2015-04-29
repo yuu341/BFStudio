@@ -9,6 +9,6 @@
 }
 
 <ul class="logout">
-    <li>@Ajax.ActionLink("ログアウト", "LogOff", "Login", null, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "main" }, htmlAttributes: new { @class = "upper-menu" })</li>
+    <li>@Html.ActionLink("ログアウト", "LogOff", "Login", null, htmlAttributes: new { @class = "upper-menu" })</li>
 </ul>
 

@@ -17,7 +17,9 @@ namespace BFStudio.App_Start
             };
 
             this.PartialViewLocationFormats = new string[]{
-                "~/MainPages/Shared/{0}.cshtml"
+                "~/MainPages/Shared/{0}.cshtml",
+                "~/MainPages/{1}/Views/{0}.cshtml",
+                "~/Pages/{1}/Views/{0}.cshtml",
             };
         }
     }

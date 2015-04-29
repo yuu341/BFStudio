@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNet.Identity;
 using System.Web.Configuration;
 using BFStudio.Utility.MVC;
+using BFStudio.Utility.Manager;
 
 namespace BFStudio.Pages.ChatRoom.Signal
 {
@@ -42,27 +43,41 @@ namespace BFStudio.Pages.ChatRoom.Signal
 
         protected override Task OnReceived(IRequest request, string connectionId, string data)
         {
-            var chat = JsonConvert.DeserializeObject<V_CHATMSG>(data);
-            
-            using (var ent = new DBManageEntities())
+            try
             {
-                
-                var id = request.User.Identity.GetUserId();
+                var chat = JsonConvert.DeserializeObject<V_CHATMSG>(data);
+
+                using (var ent = new DBManageEntities())
+                {
+                    var id = request.User.Identity.GetUserId();
 
 
-                var user = SystemCacheManager.GetUser(id);
-                
-                var user_id = user.USER_ID;
-                var user_nm = user.LOGIN_NM;
+                    var user = SystemCacheManager.GetUser(id);
 
-                ent.DBA_CHAT.Add(new DBA_CHAT() {
-                    ROOM_ID = 0 , SEND_USER_ID = user_id , USER_MSG = chat.USER_MSG });
+                    var user_id = user.USER_ID;
+                    var user_nm = user.LOGIN_NM;
 
-                //chat.SEND_USER_ID = user_id;
-                chat.SEND_USER_NM = user_nm;
-                ent.SaveChanges();
+                    ent.DBA_CHAT.Add(new DBA_CHAT()
+                    {
+                        ROOM_ID = 0,
+                        SEND_USER_ID = user_id,
+                        USER_MSG = chat.USER_MSG
+                    });
+
+                    //chat.SEND_USER_ID = user_id;
+                    chat.SEND_USER_NM = user_nm;
+                    ent.SaveChanges();
+                }
+                return Connection.Broadcast(chat);
             }
-            return Connection.Broadcast(chat);
+            catch (Exception e)
+            {
+                Logging.Logger.Error(e.Message);
+                Logging.Logger.Error(e.InnerException);
+                Logging.Logger.Error(e.StackTrace);
+            }
+
+            return Connection.Broadcast(data);
         }
     }
 }

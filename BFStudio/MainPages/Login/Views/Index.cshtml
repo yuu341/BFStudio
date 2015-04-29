@@ -1,34 +1,43 @@
 ﻿@model BFStudio.MainPages.Login.Models.LoginModel
-
 @{
     ViewBag.Title = "ログイン画面";
 }
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" style="margin-top:200px">
 
-<body>
-    @using (Html.BeginForm("Authentication", "Login", new { ReturnUrl = ViewBag.ReturnUrl, @class = "form-login" }, FormMethod.Post))
-    {
-        <div class="login">
-            @Html.AntiForgeryToken()
-            <div class="main">
-                <div class="title">
-                    <h1>予定管理システム</h1>
-                    <h1>BF-Studio</h1>
+            @using (Html.BeginForm("Authentication", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
+            {
+                <h1 class="text-center" id="login-logo"><em>bf-studio.</em></h1>
+                @Html.AntiForgeryToken()
+                <div class="form-group form-inline">
+                    @Html.LabelFor(m => m.LoginId, htmlAttributes: new { id = "user", @class = "control-label col-sm-3 text-right" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(m => m.LoginId, htmlAttributes: new { id = "user", placeholder = "ログイン", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.LoginId)
+                    </div>
                 </div>
-                <div>
-                    @Html.LabelFor(m => m.LoginId, htmlAttributes: new { id = "user" })
-                    @Html.TextBoxFor(m => m.LoginId, htmlAttributes: new { id = "user", placeholder = "ログイン" })
-                    @Html.ValidationMessageFor(m => m.LoginId)
-                </div>
-                <div>
-                    @Html.LabelFor(m => m.Password, htmlAttributes: new { id = "pass" })
-                    @Html.PasswordFor(m => m.Password, htmlAttributes: new { id = "pass", placeholder = "パスワード" })
-                    @Html.ValidationMessageFor(m => m.Password)
+                <div class="form-group form-inline">
+                    @Html.LabelFor(m => m.Password, htmlAttributes: new { id = "pass", @class = "control-label col-sm-3 text-right" })
+                    <div class="col-sm-6">
+                        @Html.PasswordFor(m => m.Password, htmlAttributes: new { id = "pass", placeholder = "パスワード", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
                 </div>
 
-                <input type="submit" value="ログイン" />
-            </div>
+                <div class="form-group text-center">
+                    <input type="submit" class="btn btn-success" value="ログイン" />
+                    @Ajax.ActionLink("ユーザ登録", "Create", "", new AjaxOptions() { HttpMethod = "GET", InsertionMode=InsertionMode.Replace , AllowCache=false , UpdateTargetId = "user-register" },
+                    htmlAttributes: new { @class = "btn btn-primary", id = "test", data_toggle = "modal", data_target = "#user-register" })
+                </div>
+
+            }
         </div>
-    }
-    @Styles.Render("~/bundles/css")
+        <div class="col-sm-3"></div>
+    </div>
 
-</body>
+
+</div><div class="modal fade" role="dialog" id="user-register" tabindex="-1" aria-labelledby="modal-user-reg-title" aria-hidden="true">
+
+</div>
