@@ -2,6 +2,7 @@
 .modal{
     overflow: auto;
 }
+
 #login-logo{
     margin-top:30px;
     margin-bottom:30px;
@@ -14,72 +15,7 @@
     }
 }
 
-#chat-hist{
-    margin:0 auto;
-    margin-left:50px;
-    margin-right:50px;
-    height:800px;
-    background-color:aqua;
-
-    div.record{
-        background-color:pink;
-        width:100%;
-        float:left;
-        display:block;
-
-        &:after{
-            clear:both;
-        }
-       
-    }
-    ul{
-
-        display:inline-block;
-        list-style-type:none;
-
-        &.user-info{
-            width:10%;
-            padding:0;
-
-            background-color:green;
-            text-align:right;
-
-            li{width:100%;
-            margin:0;}
-            label{
-                width:100%;
-                margin:0;
-                }
-        }
-
-        &.msg{
-            width:90%;
-            padding:0;
-            background-color:aquamarine;
-            text-align:left;
-
-            li{width:100%;margin:0; padding:0;}
-            label{width:100%;margin:0;}
-            margin:0;
-        }
-    }
+.table{
+    overflow:auto;
 }
 
-    #container .modal.fade {
-         left: -25%;
-          -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-             -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-               -o-transition: opacity 0.3s linear, left 0.3s ease-out;
-                  transition: opacity 0.3s linear, left 0.3s ease-out;
-    }
-    #container .modal.fade.in {
-        left: 50%;
-    }
-    #container .modal-body {
-        max-height: 50px;
-    }
-    #article-editor {
-    width: 600px;
-    margin-left: -300px;
-    margin-right: -300px;
-}

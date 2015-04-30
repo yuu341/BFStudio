@@ -17,11 +17,37 @@ namespace BFStudio.Utility.MVC
                 {
                     using (var ent = new DBManageEntities())
                     {
-                        SetCache(ent.MST_MENU.ToList());
+                        SetCache(CreateTreeMenu(ent.MST_MENU.ToList()));
                     }
                 }
                 return GetCache() as List<MST_MENU>;
             }
+        }
+
+        private static List<MST_MENU> CreateTreeMenu(List<MST_MENU> menu)
+        {
+            List<MST_MENU> result = new List<MST_MENU>();
+
+            result = menu.Where(p => p.PMENU_ID == null).OrderBy(p => p.SORT_NO).ToList();
+
+            foreach (var each in result)
+            {
+                CreateChild(each);
+            }
+
+            return result;
+        }
+        private static void CreateChild(MST_MENU menu)
+        {
+            if (menu.MST_MENU1.Count == 0)
+                return;
+         
+            menu.ChildMenu = menu.MST_MENU1.OrderBy(p => p.SORT_NO).ToList();
+            foreach (var each in menu.ChildMenu)
+            {
+                CreateChild(each);
+            }
+
         }
 
         public static List<MST_USER> UserList

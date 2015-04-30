@@ -9,7 +9,7 @@ namespace BFStudio
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery")
-                .Include("~/Scripts/jquery-{version}.js", 
+                .Include("~/Scripts/jquery-{version}.js",
                 "~/Scripts/jquery.unobtrusive-ajax.js",
                 "~/Scripts/jquery.signalR-{version}.js"));
 
@@ -41,8 +41,10 @@ namespace BFStudio
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/normalize-{version}",
                       "~/Content/bootstrap.css",
-                      "~/Content/menu.css",
                       "~/Content/site.css"));
+            
+            bundles.Add(new StyleBundle("~/Content/menu").Include( "~/Content/menu.css" ));
+            bundles.Add(new ScriptBundle("~/bundles/menu").Include("~/Scripts/menu.js"));
 
             //自作カレンダー
             bundles.Add(new StyleBundle("~/bundles/calendar").Include(

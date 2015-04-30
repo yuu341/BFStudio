@@ -249,6 +249,7 @@
     <Compile Include="Entity\MST_USER.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\p\MST_MENU.cs" />
     <Compile Include="Entity\p\MST_USER.cs" />
     <Compile Include="Entity\V_CHATMSG.cs">
       <DependentUpon>DBManageModel.tt</DependentUpon>
@@ -363,6 +364,7 @@
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\menu.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
