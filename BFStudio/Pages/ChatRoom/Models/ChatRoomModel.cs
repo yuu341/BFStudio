@@ -30,5 +30,7 @@ namespace BFStudio.Pages.ChatRoom.Models
             set;
         }
 
+        public List<V_CHATROOM> RoomList { get; set; }
+
     }
 }

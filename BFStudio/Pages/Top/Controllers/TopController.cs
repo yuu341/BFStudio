@@ -7,21 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 //using BFStudio.Entity;
-using BFStudio.MainPages.Top.Models;
+using BFStudio.Pages.Top.Models;
 using BFStudio.Utility.MVC;
 
-namespace BFStudio.MainPages.Top.Controllers
+namespace BFStudio.Pages.Top.Controllers
 {
     [Authorize]
     public class TopController : BaseController
     {
-
+        public ActionResult Top()
+        {
+            return View("Index",new TopModel());
+        }
         // GET: Top
         public ActionResult Index()
         {
             TopModel model = new TopModel();
 
-            return View(model);
+            return PartialView(model);
         }
 
         protected override void Dispose(bool disposing)

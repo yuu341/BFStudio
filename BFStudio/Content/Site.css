@@ -11,7 +11,12 @@
 #user-input-space #chat-msg {
   width: 80%;
 }
-.table {
-  overflow: auto;
+#main-body {
+  z-index: 0;
+  margin-left: 20px;
+  margin-right: 20px;
 }
-/*# sourceMappingURL=Site.css.map */
+#cssmenu {
+  z-index: 1;
+}
+/*# sourceMappingURL=site.css.map */

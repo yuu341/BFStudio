@@ -15,13 +15,18 @@ namespace BFStudio.MainPages.Login.Controllers
     [Authorize]
     public class LoginController : BaseController
     {
+
+        public ActionResult Action()
+        {
+            return View();
+        }
         private ActionResult RedirectToLocal(string returnUrl)
         {
             //if (Url.IsLocalUrl(returnUrl))
             //{
             //    return Redirect(returnUrl);
             //}
-            return RedirectToAction("Index", "Top");
+            return RedirectToAction("Top", "Top");
         }
 
         [AllowAnonymous]

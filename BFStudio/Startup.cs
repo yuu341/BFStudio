@@ -13,6 +13,8 @@ namespace BFStudio
             ConfigureAuth(app);
             app.MapSignalR<ChatConnection>(ChatConnection.Path);
             app.MapSignalR<InfoConnection>("/info");
+
+            app.MapSignalR();
         }
     }
 }

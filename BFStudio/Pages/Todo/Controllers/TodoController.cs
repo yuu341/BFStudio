@@ -13,7 +13,7 @@ namespace BFStudio.Pages.Todo.Controllers
         {
             TodoModel model = new TodoModel();
 
-            return View(model);
+            return PartialView(model);
         }
 
         protected override void Dispose(bool disposing)

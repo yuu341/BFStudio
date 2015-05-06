@@ -1,51 +1,37 @@
-﻿.calendar-body {
-  width: 1200px;
-  /*//日曜
-    .sunday label{
-        width:100px;
-        height:200px;
-    }
-
-    //土曜
-    .saturday{
-        width:100px;
-        height:200px;
-    }
-
-    //平日
-    .weekday{
-        width:100px;
-        height:200px;
-    }*/
+﻿/*#region 色 */
+/*#endregion */
+/*#region 計算によって算出される値 */
+/*#endregion */
+#calendar {
+  background-color: blanchedalmond;
+  z-index: 1;
 }
-.calendar-body .disp-date {
-  margin: 0 auto;
+#calendar-monthly {
+  width: 700px;
+  height: 970px;
+  border-radius: 4px;
 }
-.calendar-body .disp-date > input {
-  background-color: inherit;
-  border-style: none;
-  text-align: right;
-}
-div.calendar-body {
-  /*width:700px;
-        height:1000px;*/
-  background-color: aquamarine;
-}
-.calendar-body th > div {
-  width: 200px;
-  height: 20px;
-  background-color: aqua;
-  margin: 0;
-  padding: 0;
-}
-.calendar-body th > div > label {
-  width: inherit;
+#calendar-monthly tr th {
   text-align: center;
-  background-color: pink;
+  background-color: black;
+  height: 20px;
 }
-.calendar-body td > div {
-  width: 200px;
-  height: 150px;
-  background-color: antiquewhite;
+#calendar-monthly tr.each div {
+  width: 100px;
+  height: 90px;
+  background-color: green;
+}
+#calendar-monthly tr.each div:hover {
+  background-color: #00b300;
+}
+#calendar-monthly tr.interval div {
+  width: 100px;
+  height: 10px;
+  background-color: white;
+  text-align: center;
+}
+#calendar-monthly td {
+  border-width: 0;
+  padding: 0;
 }
 /*# sourceMappingURL=calendar.css.map */

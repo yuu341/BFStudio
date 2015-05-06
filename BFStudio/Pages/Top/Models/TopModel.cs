@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BFStudio.MainPages.Top.Models
+namespace BFStudio.Pages.Top.Models
 {
     public class TopModel
     {

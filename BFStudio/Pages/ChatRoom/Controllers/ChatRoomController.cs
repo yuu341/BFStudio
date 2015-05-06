@@ -18,7 +18,7 @@ namespace BFStudio.Pages.ChatRoom.Controllers
         {
             ChatRoomModel model = new ChatRoomModel();
 
-            return View(model);
+            return PartialView(model);
         }
 
         protected override void Dispose(bool disposing)

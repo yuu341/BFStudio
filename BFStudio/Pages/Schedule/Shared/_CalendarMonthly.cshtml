@@ -1,0 +1,46 @@
+﻿@model BFStudio.Pages.Schedule.Models.CalendarModel
+@{
+    
+}
+<div id="calendar-monthly">
+
+    <div>
+        <input type="text" class="form-control text-center" value="YYYY/MM/DD" placeholder="20YY/MM/DD" >
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>日</th>
+                <th>月</th>
+                <th>日</th>
+                <th>水</th>
+                <th>木</th>
+                <th>金</th>
+                <th>土</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int h = 1; h <= 5; h++)
+            {
+                <tr class="each">
+                    @for (int w = 1; w <= 7; w++)
+                    {
+                        var day = (h - 1) * w + w;
+                        <td><div>@day</div></td>
+                    }
+                </tr>
+                <tr class="interval">
+                    @for (int w = 1; w <= 7; w++)
+                    {
+                        var day = (h - 1) * w + w;
+                        <td><div></div></td>
+                    }
+                </tr>
+            }
+        </tbody>
+
+
+
+    </table>
+
+</div>

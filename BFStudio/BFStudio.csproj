@@ -273,8 +273,10 @@
     <Compile Include="MainPages\Login\Models\LoginModel.cs" />
     <Compile Include="MainPages\RegisterUser\Controllers\RegisterUserController.cs" />
     <Compile Include="MainPages\Login\Models\CreateUserModel.cs" />
-    <Compile Include="MainPages\Top\Controllers\TopController.cs" />
-    <Compile Include="MainPages\Top\Models\TopModel.cs" />
+    <Compile Include="Pages\Schedule\Models\CalendarModel.cs" />
+    <Compile Include="Pages\Top\Controllers\TopController.cs" />
+    <Compile Include="Pages\Top\Models\TopModel.cs" />
+    <Compile Include="Pages\ChatRoom\Signal\ChatHub.cs" />
     <Compile Include="Pages\Database\Controllers\DatabaseController.cs" />
     <Compile Include="Pages\ChatRoom\Controllers\ChatRoomController.cs" />
     <Compile Include="Pages\ChatRoom\Models\ChatRoomModel.cs" />
@@ -310,6 +312,12 @@
     <Content Include="Content\calendar.min.css">
       <DependentUpon>calendar.css</DependentUpon>
     </Content>
+    <Content Include="Content\debug-color.css">
+      <DependentUpon>debug-color.less</DependentUpon>
+    </Content>
+    <Content Include="Content\debug-color.min.css">
+      <DependentUpon>debug-color.css</DependentUpon>
+    </Content>
     <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\menu.css">
       <DependentUpon>menu.less</DependentUpon>
@@ -320,6 +328,10 @@
     <Content Include="Content\Normalize-1.0.css.map">
       <DependentUpon>Normalize-1.0.css</DependentUpon>
     </Content>
+    <Content Include="Content\debug-color.less" />
+    <Content Include="Content\debug-color.css.map">
+      <DependentUpon>debug-color.css</DependentUpon>
+    </Content>
     <None Include="Content\normalize-1.0.less" />
     <Content Include="Content\Normalize-1.0.css">
       <DependentUpon>normalize-1.0.less</DependentUpon>
@@ -328,7 +340,7 @@
       <DependentUpon>Normalize-1.0.css</DependentUpon>
     </Content>
     <Content Include="Content\Site.css">
-      <DependentUpon>Site.less</DependentUpon>
+      <DependentUpon>site.less</DependentUpon>
     </Content>
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
@@ -339,7 +351,7 @@
     <Content Include="Content\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
-    <None Include="Content\Site.less" />
+    <None Include="Content\site.less" />
     <Content Include="Log4Net.Config.xml" />
     <Content Include="MainPages\Login\Views\Create.cshtml" />
     <Content Include="Pages\ChatRoom\Views\Index.cshtml">
@@ -347,7 +359,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="MainPages\Top\Views\Index.cshtml" />
+    <Content Include="Pages\Top\Views\Index.cshtml" />
     <Content Include="MainPages\Shared\_Layout.cshtml" />
     <Content Include="MainPages\Shared\_UserPartial.cshtml" />
     <Content Include="MainPages\_ViewStart.cshtml" />
@@ -397,6 +409,7 @@
     <Content Include="Pages\TicketList\Views\Index.cshtml" />
     <Content Include="Pages\Todo\Views\Index.cshtml" />
     <Content Include="Pages\Schedule\Views\Index.cshtml" />
+    <Content Include="Pages\Schedule\Shared\_CalendarMonthly.cshtml" />
     <None Include="Properties\PublishProfiles\YuuServer.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

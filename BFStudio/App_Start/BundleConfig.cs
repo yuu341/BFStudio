@@ -42,12 +42,16 @@ namespace BFStudio
                       "~/Content/normalize-{version}",
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
-            
+
+#if DEBUG
+            bundles.GetBundleFor("~/Content/css").Include("~/Content/debug-color.css");
+#endif
+        
             bundles.Add(new StyleBundle("~/Content/menu").Include( "~/Content/menu.css" ));
             bundles.Add(new ScriptBundle("~/bundles/menu").Include("~/Scripts/menu.js"));
 
             //自作カレンダー
-            bundles.Add(new StyleBundle("~/bundles/calendar").Include(
+            bundles.Add(new StyleBundle("~/Content/calendar").Include(
                         "~/Content/calendar.css"));
         }
     }

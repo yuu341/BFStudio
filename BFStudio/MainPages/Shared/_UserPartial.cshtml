@@ -1,52 +1,30 @@
 ﻿@model IEnumerable<BFStudio.Entity.MST_MENU>
 
 <ul>
-    @foreach (var m in Model)
-    {
-        string option = "";
-        if (m.HasChild)
+        @foreach (var m in Model)
         {
-
-            option += "has-sub";
-        }
-        if (m.IsActive)
-        {
-
-            option += " active";
-        }
-
-        <li class=option>
-            @Html.ActionLink(@m.NAME, @m.ACTION , @m.CONTROLLER )
-            @if (m.HasChild)
+            string option = "";
+            if (m.HasChild)
             {
-                Html.RenderPartial("_UserPartial", m.ChildMenu);
-            }
-        </li>
-    }
-</ul>
 
-@*<ul>
-    <li><a href='#'>Top</a></li>
-    <li class='active has-sub'>
-        <a href='#'>Products</a>
-        <ul>
-            <li class='has-sub'>
-                <a href='#'>Product 1</a>
-                <ul>
-                    <li><a href='#'>Sub Product</a></li>
-                    <li><a href='#'>Sub Product</a></li>
-                </ul>
+                option += "has-sub";
+            }
+            if (m.IsActive)
+            {
+
+                option += " active";
+            }
+
+            <li class=@option>
+                @Ajax.ActionLink(@m.NAME, @m.ACTION, @m.CONTROLLER, new AjaxOptions() { AllowCache = false, HttpMethod = "GET", UpdateTargetId = "main-body" })
+                @if (m.HasChild)
+                {
+                    Html.RenderPartial("_UserPartial", m.ChildMenu);
+                }
             </li>
-            <li class='has-sub'>
-                <a href='#'>Product 2</a>
-                <ul>
-                    <li><a href='#'>Sub Product</a></li>
-                    <li><a href='#'>Sub Product</a></li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li><a href='#'>About</a></li>
-    <li><a href='#'>Contact</a></li>
+        }
+
+        @if(Model.First().PMENU_ID == null){
+        <li>@Html.ActionLink("ログアウト", "LogOff", "Login", null)</li>
+        }
 </ul>
-</div>*@

@@ -1,4 +1,6 @@
 ﻿
+
+//モーダルダイアログでスクロールバーが常に出てしまうので
 .modal{
     overflow: auto;
 }
@@ -15,7 +17,12 @@
     }
 }
 
-.table{
-    overflow:auto;
+#main-body{
+    z-index:0;
+    margin-left:20px;
+    margin-right:20px;
 }
 
+#cssmenu{
+    z-index:1;
+}

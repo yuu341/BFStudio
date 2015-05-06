@@ -1,56 +1,62 @@
-﻿@cell-height:150px;
-@cell-width:200px;
+﻿@cell-each-h:90px;
+@cell-interval-h:10px;
 @header-height:20px;
+@cell-w:100px;
 
-.calendar-body{
-    width:1200px;
-    .disp-date{
+/*#region 色 */
+@interval-bg-color:white;
+@each-bg-color:green;
+@header-bg-color:black;
 
-         margin:0 auto;
-        > input{
-            background-color:inherit;
-            border-style:none;
-            text-align:right;
-        }
-    }
-    div&{
-        /*width:700px;
-        height:1000px;*/
-        background-color:aquamarine;
-    }
-    /*//日曜
-    .sunday label{
-        width:100px;
-        height:200px;
-    }
+/*#endregion */
 
-    //土曜
-    .saturday{
-        width:100px;
-        height:200px;
-    }
+/*#region 計算によって算出される値 */
+@cell-h: @cell-each-h + @cell-interval-h;
 
-    //平日
-    .weekday{
-        width:100px;
-        height:200px;
-    }*/
+@calendar-width: @cell-w*7;
+@calendar-height: @cell-h*5 + @cell-each-h*5 + @header-height;
+/*#endregion */
 
-    th > div{
-        width:@cell-width;
-        height:@header-height;
-        background-color:aqua;
-        margin:0;
-        padding:0;
-        > label{
-            width:inherit;
+#calendar{
+    background-color:blanchedalmond;
+    z-index:1;
+}
+#calendar-monthly{
+    width:@calendar-width;
+    height:@calendar-height;
+
+    border-radius:4px;
+    
+    tr{
+        th{ //曜日
             text-align:center;
-            background-color:pink;
+            background-color:@header-bg-color;
+            height:@header-height;
+        }
+        &.each{
+            
+            div{
+                width:@cell-w;
+                height:@cell-each-h;
+                background-color:@each-bg-color;
+            }
+
+            div:hover{
+                background-color:lighten(@each-bg-color,10%);
+            }
+        }
+        &.interval{
+            
+            div{
+                width:@cell-w;
+                height:@cell-interval-h;
+                background-color:@interval-bg-color;
+                text-align:center;
+            }
         }
     }
-    td > div{
-        width:@cell-width;
-        height:@cell-height;
-        background-color:antiquewhite;
+    td{
+        border-width:0;
+        padding:0;
     }
 }

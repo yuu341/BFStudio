@@ -1,11 +1,12 @@
 ﻿@model BFStudio.Pages.Todo.Models.TodoModel
 
 @{
-    ViewBag.Title ="TODO";
+    ViewBag.Title = "TODO";
 }
-@Scripts.Render("~/bundles/jquery")
-@Styles.Render("~/Content/datatable")
-@Scripts.Render("~/bundles/datatable")
+
+<script>
+    $()
+</script>
 <div>
     <table id="todo-list" class="display">
         <thead>
@@ -28,8 +29,19 @@
     </table>
 </div>
 
+<div>
+    @using(Ajax.BeginForm("Update", "Todo" , new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "todo-form" })){
+    
+    <div class="form-group">
+        <input type="text" class="form-control col-lg-8"/>
+        <input type="submit" value="作成" class="form-control col-lg-5" />
+    </div>
+
+    <div class="form-group">
+    </div>
+    }
+</div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/blockui")
     @Scripts.Render("~/bundles/jqueryval")
 }

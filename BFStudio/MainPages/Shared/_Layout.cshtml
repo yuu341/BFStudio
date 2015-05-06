@@ -16,32 +16,21 @@
 <body>
     <div class="content">
         <div class="row">
-            <div class="col-md-12">
+            <div id="cssmenu" class="col-md-12">
 
-                <div id='cssmenu'>
                     @Html.Partial("_UserPartial", SystemCacheManager.MenuList.Where(p => p.PMENU_ID == null).OrderBy(p => p.SORT_NO))
-                </div>
-                    <ul class="logout">
-                        <li>@Html.ActionLink("ログアウト", "LogOff", "Login", null, htmlAttributes: new { @class = "upper-menu" })</li>
-                    </ul>
-
-                </div>
-            <div>
-                @RenderBody()
+            </div>
+            <div id="main-body" class="col-md-12">
+                @RenderBody() @*最初にローディングされるときのみ*@
             </div>
         </div>
     </div>
 </body>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/menu")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/menu")
 
 
-    @RenderSection("scripts", required: false)
-
-    @if (MvcApplication.IsDebug)
-    {
-        Output.WriteLine(Scripts.Render("~/Content/cssrefresh"));
-    }
+@RenderSection("scripts", required: false)
 </html>
